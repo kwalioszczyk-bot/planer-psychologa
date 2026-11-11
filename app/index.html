@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FBF8F3">
+<meta name="robots" content="noindex, nofollow">
+<title>Planer Gabinetu</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root,body[data-theme="szalwia"]{
+  --ink:#2E2A26; --muted:#5C554C; --desk:#DDD5C8; --paper:#FBF8F3; --line:#E6DED1;
+  --primary:#5F7559; --deep:#3F5239; --accent:#9A5A3C; --soft2:#DDE6D6; --soft3:#F2DDCF; --soft1:#F4EEE4;
+  --tab0:#7A8F73; --tab1:#A8B89E; --tab2:#C9D4BF; --tab3:#E2C3AE; --tab4:#D4A88C; --tab5:#E8DCC8; --tab6:#F4EEE4;
+  --tabfg0:#fff; --tabfg1:#2E2A26;
+  --ok:#DDE6D6; --warn:#F2DDCF; --danger:#A33B2C;
+}
+body[data-theme="roz"]{--desk:#E3D6D1;--paper:#FCF8F6;--line:#EEE0DB;--primary:#9A6763;--deep:#6E4542;--accent:#8A5E2E;--soft2:#F2E1DD;--soft3:#EAD9C4;--soft1:#F7F1EE;
+  --tab0:#B98A86;--tab1:#D2AAA5;--tab2:#E8CDC8;--tab3:#E3D2B8;--tab4:#C9B08A;--tab5:#EFE4DC;--tab6:#F7F1EE;--ok:#F2E1DD;--warn:#EAD9C4}
+body[data-theme="granat"]{--desk:#D8D6D0;--paper:#FAF8F4;--line:#E4E0D7;--primary:#2F3E5C;--deep:#24314A;--accent:#8A6A2A;--soft2:#DCE2EC;--soft3:#EFE3C8;--soft1:#F3F0EA;
+  --tab0:#2F3E5C;--tab1:#56688C;--tab2:#9FB0CC;--tab3:#D9C79C;--tab4:#BFA26A;--tab5:#E7E2D6;--tab6:#F3F0EA;--ok:#DCE2EC;--warn:#EFE3C8}
+:root{--serif:"Cormorant Garamond",Georgia,serif;--sans:"Jost","Segoe UI",system-ui,sans-serif;--hand:"Caveat",cursive}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:var(--sans);color:var(--ink);font-size:16.5px;line-height:1.45;background:var(--desk);-webkit-tap-highlight-color:transparent}
+button,input,select,textarea{font:inherit;color:inherit}
+h1,h2,h3{font-family:var(--serif);font-weight:600;margin:0;color:var(--deep);line-height:1.1}
+h1{font-size:40px}
+h2{font-size:28px}
+h3{font-size:22px}
+[hidden]{display:none!important}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* przyciski */
+.btn{background:#fff;border:1px solid var(--line);border-radius:22px;padding:6px 16px;cursor:pointer;min-height:42px;transition:background .15s,transform .08s}
+.btn:hover{background:var(--soft1)}
+.btn:active{transform:scale(.98)}
+.btn.or{background:var(--primary);border-color:var(--primary);color:#fff}
+.btn.or:hover{background:var(--deep)}
+.btn.gr{background:var(--soft2);border-color:var(--soft2)}
+.btn.bl{background:var(--soft3);border-color:var(--soft3)}
+.btn.ghost{background:transparent;border-style:dashed}
+.btn.sm{min-height:36px;padding:3px 12px;font-size:14px}
+.btn.danger{color:var(--danger);border-color:#E7C4BD;background:#fff}
+.linkbtn{background:none;border:0;cursor:pointer;text-decoration:underline;color:var(--muted);padding:2px}
+
+/* pola */
+input[type=text],input[type=password],input[type=date],input[type=time],input[type=number],input[type=email],input[type=tel],select,textarea{
+  width:100%;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 12px;min-height:44px;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px color-mix(in srgb,var(--primary) 18%,transparent)}
+textarea{min-height:90px;resize:vertical;line-height:1.5}
+textarea.lined{background:#fff repeating-linear-gradient(transparent 0 35px,var(--line) 35px 36px);line-height:36px;padding-top:0;font-size:18px;min-height:116px}
+label{display:block;margin:10px 0 4px;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
+.row>*{flex:1 1 150px}
+.row>.auto{flex:0 0 auto}
+.hint{font-size:13.5px;color:var(--muted);margin-top:4px}
+
+/* blokada */
+#lock{min-height:100%;display:flex;align-items:center;justify-content:center;padding:20px;background:var(--desk)}
+.lockcard{max-width:440px;width:100%;background:var(--paper);border-radius:28px;padding:30px 32px;box-shadow:0 18px 40px rgba(46,42,38,.18);position:relative;overflow:hidden}
+.lockcard::before{content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;background:var(--soft3)}
+.lockcard>*{position:relative}
+.lockcard h1{font-size:46px;text-align:center}
+.lockcard .sub{text-align:center;font-family:var(--serif);font-style:italic;font-size:22px;margin-bottom:10px;color:var(--muted)}
+.err{color:var(--danger);min-height:22px}
+.note{background:var(--soft1);border-left:4px solid var(--primary);border-radius:10px;padding:10px 12px;font-size:14.5px;margin:10px 0}
+
+/* planer */
+#app{display:flex;min-height:100%;padding:22px 0 22px 24px}
+.book{flex:1;min-width:0;background:var(--paper);border-radius:20px 4px 4px 20px;box-shadow:0 18px 40px rgba(46,42,38,.16),0 2px 0 rgba(46,42,38,.06);padding:22px 32px 34px 32px;position:relative}
+.tabs{display:flex;flex-direction:column;gap:5px;padding-top:40px;width:80px;flex:0 0 80px}
+.tab{writing-mode:vertical-rl;border:0;border-radius:0 14px 14px 0;padding:16px 0;cursor:pointer;font-size:14px;font-weight:500;letter-spacing:.06em;min-height:88px;width:54px;
+  box-shadow:4px 4px 10px rgba(46,42,38,.10);background:var(--c);color:var(--fg);text-align:center}
+.tab.on{width:68px;font-weight:600}
+.topbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:16px}
+.topbar .brand{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-weight:600;font-size:24px;color:var(--deep);cursor:pointer;background:none;border:0;padding:0}
+.brand .dot{width:34px;height:34px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center}
+.topbar .sp{flex:1}
+.banner{background:var(--soft3);border-radius:14px;padding:8px 14px;margin-bottom:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:14.5px}
+.pagehead{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.pagehead h1{flex:1;min-width:200px}
+.navbtn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:20px;cursor:pointer;color:var(--ink)}
+.bigday{font-family:var(--serif);font-weight:600;font-size:64px;line-height:.9;color:var(--deep)}
+.dayname{font-family:var(--serif);font-style:italic;font-size:26px;line-height:1}
+
+/* karty */
+.sticky{background:var(--c,var(--soft2));border-radius:18px;padding:14px 16px;margin:0 0 14px}
+.sticky h3{margin-bottom:6px;font-size:21px}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px 18px;margin-bottom:14px}
+.cloud{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px 18px;margin:14px 0}
+hr.dash{border:0;border-top:1px dashed var(--line);margin:14px 0}
+.hl{background:linear-gradient(transparent 60%,var(--soft2) 60%)}
+
+/* home */
+.home{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:30px}
+.hero{position:relative;height:230px;border-radius:150px 150px 20px 20px;background:var(--soft2);overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:26px 28px;margin-bottom:16px}
+.hero::before{content:"";position:absolute;right:-40px;top:-30px;width:210px;height:210px;border-radius:50%;background:var(--soft3)}
+.hero::after{content:"";position:absolute;right:40px;top:44px;width:100px;height:100px;border-radius:50%;border:1.5px solid var(--deep);opacity:.3}
+.hero h1{position:relative;font-size:54px;line-height:.95}
+.hero h1 i{font-weight:500}
+.hero p{position:relative;margin:8px 0 0;color:var(--muted)}
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 14px;cursor:pointer;text-align:left}
+.kpi b{display:block;font-family:var(--serif);font-weight:600;font-size:36px;line-height:1;color:var(--deep)}
+.kpi span{font-size:13px;color:var(--muted)}
+.mcal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px;text-align:center;font-size:13.5px;margin-top:6px}
+.mcal .dw{font-size:11px;letter-spacing:.08em;color:var(--muted)}
+.mcal button{height:30px;border:0;background:none;border-radius:50%;cursor:pointer;position:relative}
+.mcal button.has::after{content:"";position:absolute;bottom:2px;left:50%;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:var(--primary)}
+.mcal button.on{background:var(--primary);color:#fff;font-weight:600}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.tile{border:0;border-radius:20px;padding:16px 14px;min-height:140px;display:flex;flex-direction:column;justify-content:space-between;text-align:left;cursor:pointer;background:var(--c)}
+.tile .ic{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.8);display:flex;align-items:center;justify-content:center}
+.tile b{display:block;font-family:var(--serif);font-weight:600;font-size:23px;line-height:1.05;color:var(--ink)}
+.tile span{display:block;font-size:12.5px;color:#4A453F;margin-top:3px}
+
+/* dzień */
+.daycols{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:28px}
+.weekstrip{display:flex;gap:6px;margin-bottom:12px}
+.weekstrip button{flex:1;border:0;border-radius:12px;padding:5px 0;background:#fff;cursor:pointer}
+.weekstrip button b{display:block;font-family:var(--serif);font-size:20px;line-height:1.1}
+.weekstrip button span{font-size:11px;letter-spacing:.08em}
+.weekstrip button.on{background:var(--primary);color:#fff}
+.sched{border-top:1px solid var(--line)}
+.hour{display:flex;border-bottom:1px solid var(--line);min-height:50px;cursor:pointer;align-items:center}
+.hour:hover{background:var(--soft1)}
+.hour .h{width:52px;flex:0 0 52px;font-size:13px;color:var(--muted)}
+.hour .slot{flex:1;display:flex;flex-direction:column;gap:4px;padding:4px 0}
+.chip{display:flex;gap:10px;align-items:center;text-align:left;width:100%;background:var(--soft2);border:0;border-left:6px solid var(--c,var(--primary));border-radius:10px;padding:6px 10px;cursor:pointer;font-size:14px}
+.chip b{font-weight:600}
+.chip .code{font-weight:600;letter-spacing:.04em;background:#fff;border-radius:20px;padding:1px 10px;white-space:nowrap}
+.chip .st{margin-left:auto;font-size:12px;color:var(--muted);white-space:nowrap}
+.chip.odbyta{background:var(--soft2)}
+.chip.odw,.chip.nb{opacity:.55;background:#EEE9E1}
+.chip.odw .code,.chip.nb .code{text-decoration:line-through}
+.todo{display:flex;gap:10px;align-items:center;padding:5px 0;border-bottom:1px dashed var(--line)}
+.todo:last-child{border-bottom:0}
+.todo input[type=checkbox]{width:20px;height:20px;accent-color:var(--deep)}
+.todo.done span{text-decoration:line-through;color:var(--muted)}
+.todo span{flex:1}
+
+/* tydzień / miesiąc */
+.week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+.wcol{background:#fff;border:1px solid var(--line);border-radius:14px;min-height:260px;padding:6px;display:flex;flex-direction:column;gap:5px}
+.wcol.today{border-color:var(--primary);box-shadow:0 0 0 2px var(--primary)}
+.whead{font-size:12px;letter-spacing:.08em;cursor:pointer;border-bottom:1px solid var(--line);padding-bottom:4px;text-align:center;color:var(--muted)}
+.whead .n{display:block;font-family:var(--serif);font-weight:600;font-size:26px;color:var(--deep);letter-spacing:0}
+.wcol .chip{font-size:12.5px;padding:4px 6px;flex-direction:column;align-items:flex-start;gap:2px}
+.wcol .chip .st{margin-left:0}
+.month{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.mdow{text-align:center;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.mcell{background:#fff;border:1px solid var(--line);border-radius:12px;min-height:96px;padding:4px 7px;cursor:pointer;font-size:12.5px;overflow:hidden}
+.mcell.out{opacity:.35}
+.mcell.today{border-color:var(--primary);box-shadow:0 0 0 2px var(--primary)}
+.mcell .d{font-family:var(--serif);font-weight:600;font-size:22px;color:var(--deep)}
+.mcell .mini{display:block;border-left:4px solid var(--c);padding-left:4px;margin:1px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:8px 16px;min-width:120px;font-size:13px;color:var(--muted)}
+.stat b{display:block;font-family:var(--serif);font-weight:600;font-size:32px;line-height:1.05;color:var(--deep)}
+
+/* pacjenci */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.pcard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:12px 14px;cursor:pointer;text-align:left;position:relative;overflow:hidden}
+.pcard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--c)}
+.pcard .code{font-family:var(--serif);font-weight:600;font-size:30px;line-height:1;color:var(--deep)}
+.badge{display:inline-block;border-radius:20px;padding:1px 10px;font-size:12.5px;background:var(--soft1);margin:2px 2px 0 0}
+.badge.aktywny{background:var(--soft2)} .badge.zakonczony{background:#EEE9E1} .badge.oczekujacy{background:var(--soft3)}
+.ptabs{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 16px}
+.ptab{border:1px solid var(--line);border-radius:22px;padding:6px 14px;background:#fff;cursor:pointer;font-size:14px;min-height:40px}
+.ptab.on{background:var(--primary);border-color:var(--primary);color:#fff}
+.phead{display:flex;align-items:center;gap:18px;background:var(--soft2);border-radius:120px 20px 20px 120px;padding:12px 22px 12px 12px;margin-bottom:10px;flex-wrap:wrap}
+.phead .ring{width:100px;height:100px;border-radius:50%;background:var(--paper);display:flex;align-items:center;justify-content:center;flex:0 0 100px;font-family:var(--serif);font-weight:600;font-size:28px;color:var(--deep);border:4px solid var(--c)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 20px}
+.colors{display:flex;gap:8px;flex-wrap:wrap}
+.colors button{width:32px;height:32px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--line);cursor:pointer}
+.colors button.on{box-shadow:0 0 0 3px var(--deep)}
+.list .item{display:flex;gap:10px;align-items:center;border-bottom:1px solid var(--line);padding:9px 4px;cursor:pointer}
+.list .item:hover{background:var(--soft1)}
+.list .item .grow{flex:1;min-width:0}
+.ellip{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vault{background:var(--soft3);border-radius:18px;padding:16px 18px}
+
+/* modal */
+#modal{position:fixed;inset:0;background:rgba(46,42,38,.35);display:flex;align-items:flex-start;justify-content:center;padding:20px 10px;overflow:auto;z-index:50}
+.mbox{background:var(--paper);border-radius:22px;box-shadow:0 20px 50px rgba(46,42,38,.25);width:100%;max-width:820px;padding:20px 24px;position:relative}
+.mbox .x{position:absolute;right:14px;top:12px}
+.mfoot{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
+.mfoot .sp{flex:1}
+
+/* szkicownik */
+.padwrap{border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden}
+.padtools{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:6px 8px;border-bottom:1px solid var(--line);background:var(--soft1)}
+.padtools .pen{width:30px;height:30px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--line);cursor:pointer}
+.padtools .pen.on{box-shadow:0 0 0 3px var(--deep)}
+canvas.pad{display:block;width:100%;height:340px;touch-action:none;background:#fff radial-gradient(var(--line) 1.1px,transparent 1.3px) 0 0/20px 20px;cursor:crosshair}
+
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--deep);color:#fff;padding:10px 18px;border-radius:14px;z-index:99;font-size:15px;max-width:90vw}
+#print{display:none}
+
+/* pisanie rysikiem */
+.wwrap{position:relative}
+.wwrap .wbtn{position:absolute;right:8px;top:6px;z-index:2;background:var(--primary);color:#fff;border:0;border-radius:20px;padding:2px 12px;font-size:13px;cursor:pointer;min-height:32px}
+.wwrap textarea{padding-right:84px}
+#writer{position:fixed;left:0;right:0;top:0;height:56vh;z-index:80;background:var(--paper);box-shadow:0 10px 30px rgba(46,42,38,.25);display:flex;flex-direction:column;padding:12px 16px;gap:8px}
+#writer .whead{display:flex;align-items:center;gap:10px}
+#writer .whead h3{flex:1}
+#writer textarea{flex:1;min-height:0;font-size:24px;line-height:46px;background:#fff repeating-linear-gradient(transparent 0 45px,var(--line) 45px 46px);padding:0 14px}
+
+/* pierwsza wizyta */
+.ikgrid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:22px;align-items:start}
+.ikres{position:sticky;top:10px;max-height:calc(100vh - 20px);overflow:auto}
+.ksec{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 16px;margin-bottom:12px}
+.ksec h3{margin-bottom:4px}
+.chks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px 14px}
+.chks label{font-size:15px;letter-spacing:0;text-transform:none;color:var(--ink);font-weight:400;display:flex;gap:8px;align-items:flex-start;margin:4px 0}
+.chks input{width:20px;height:20px;flex:0 0 20px;accent-color:var(--deep);margin-top:1px}
+.scale td{padding:5px 6px;border-bottom:1px solid var(--line);font-size:14.5px;vertical-align:middle}
+.scale select{min-height:36px;padding:2px 8px;width:auto}
+.alert{background:#F8E1DC;border-left:5px solid var(--danger);border-radius:10px;padding:8px 12px;margin:8px 0;font-size:14.5px}
+.find{border:1px solid var(--line);border-left:6px solid var(--primary);border-radius:12px;padding:10px 14px;margin:8px 0;background:#fff}
+.find .codes{font-size:13.5px;margin:4px 0}
+.find .codes b{font-weight:600}
+.find ul{margin:4px 0 0 18px;padding:0;font-size:14px}
+.dxi{display:flex;gap:10px;align-items:center;border-bottom:1px solid var(--line);padding:7px 2px}
+.dxi .c{font-weight:600;min-width:70px}
+
+@media (max-width:980px){
+  .daycols,.home,.ikgrid{grid-template-columns:1fr}
+  .week{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ikres{position:static;max-height:none}.chks{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  #app{flex-direction:column;padding:0 0 76px}
+  .book{border-radius:0;box-shadow:none;padding:14px 14px 20px}
+  .tabs{position:fixed;bottom:0;left:0;right:0;flex-direction:row;width:auto;padding:6px;background:var(--paper);border-top:1px solid var(--line);z-index:20;overflow-x:auto}
+  .tab{writing-mode:horizontal-tb;min-height:0;width:auto;flex:1;border-radius:12px;padding:8px;box-shadow:none}
+  .tab.on{width:auto}
+  .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .month .mcell{min-height:60px}.mcell .mini{display:none}
+  .grid2{grid-template-columns:1fr}
+  h1{font-size:30px}
+}
+@media print{
+  body{background:#fff;font-size:12pt}
+  #app,#lock,#modal,.toast,#writer{display:none!important}
+  #print{display:block!important;font-family:Georgia,"Times New Roman",serif;color:#000;padding:0 6mm}
+  #print h1{font-family:Georgia,serif;color:#000;font-size:18pt;text-align:center;margin:10px 0}
+  #print h2{font-family:Georgia,serif;color:#000;font-size:13pt;margin:14px 0 4px}
+  #print .lh{border-bottom:1px solid #000;padding-bottom:6px;margin-bottom:10px;font-size:10pt}
+  #print table{width:100%;border-collapse:collapse;font-size:10.5pt}
+  #print td,#print th{border:1px solid #555;padding:4px 6px;vertical-align:top;text-align:left}
+  #print .sign{margin-top:40px;text-align:right}
+  #print .pre{white-space:pre-wrap}
+  @page{size:A4;margin:15mm}
+}
+</style>
+</head>
+<body>
+
+<div id="lock"></div>
+
+<div id="app" hidden>
+  <div class="book">
+    <div class="topbar">
+      <button class="brand" data-act="go" data-v="home"><span class="dot"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></svg></span>Planer Gabinetu</button>
+      <span class="muted small" id="clock"></span>
+      <span class="sp"></span>
+      <span id="syncInfo" class="small"></span>
+      <button class="btn sm" data-act="backupNow">Kopia</button>
+      <button class="btn sm or" data-act="lockNow">Zablokuj</button>
+    </div>
+    <div id="banners"></div>
+    <main id="view"></main>
+  </div>
+  <nav class="tabs" id="tabs"></nav>
+</div>
+
+<div id="modal" hidden></div>
+<div id="print"></div>
+
+<script src="planer.config.js"></script>
+<script src="kliniczne.js"></script>
+<script>
+"use strict";
+/* =====================================================================
+   PLANER GABINETU — aplikacja dla gabinetu psychologicznego
+   Dane wyłącznie na tym urządzeniu, zaszyfrowane AES-GCM 256 (klucz z hasła, PBKDF2 310 000).
+   Do repozytorium trafia tylko kod. Żadnych danych pacjentów w plikach!
+   ===================================================================== */
+
+/* ---------- narzędzia ---------- */
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+const pad=n=>String(n).padStart(2,'0');
+const ymd=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const parseYmd=s=>{const[y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
+const addDays=(s,n)=>{const d=parseYmd(s);d.setDate(d.getDate()+n);return ymd(d)};
+const weekStart=s=>{const d=parseYmd(s);d.setDate(d.getDate()-((d.getDay()+6)%7));return ymd(d)};
+const today=()=>ymd(new Date());
+const nowHM=()=>{const d=new Date();return `${pad(d.getHours())}:${pad(d.getMinutes())}`};
+const DNI=['poniedziałek','wtorek','środa','czwartek','piątek','sobota','niedziela'];
+const DNI_K=['pn','wt','śr','cz','pt','so','nd'];
+const MIES=['styczeń','luty','marzec','kwiecień','maj','czerwiec','lipiec','sierpień','wrzesień','październik','listopad','grudzień'];
+const MIES_D=['stycznia','lutego','marca','kwietnia','maja','czerwca','lipca','sierpnia','września','października','listopada','grudnia'];
+const dow=s=>(parseYmd(s).getDay()+6)%7;
+const fmtLong=s=>{const d=parseYmd(s);return `${DNI[dow(s)]}, ${d.getDate()} ${MIES_D[d.getMonth()]} ${d.getFullYear()}`};
+const fmtShort=s=>{if(!s)return '';const d=parseYmd(s);return `${pad(d.getDate())}.${pad(d.getMonth()+1)}.${d.getFullYear()}`};
+const addMin=(date,time,min)=>{const[y,m,d]=date.split('-').map(Number);const[h,mi]=time.split(':').map(Number);const x=new Date(y,m-1,d,h,mi+Number(min||0));return{date:ymd(x),time:`${pad(x.getHours())}:${pad(x.getMinutes())}`}};
+const money=n=>(Number(n)||0).toLocaleString('pl-PL')+' zł';
+function toast(msg,ms=2600){const t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),ms)}
+
+/* ---------- słowniki ---------- */
+const TYPES=['Sesja terapeutyczna','Konsultacja','Diagnoza','Psychoedukacja','Konsultacja rodzicielska','Omówienie opinii','Interwencja kryzysowa'];
+const STATUSES=[['zaplanowana','zaplanowana'],['odbyta','odbyta'],['odw-pacjent','odwołana przez pacjenta'],['odw-ja','odwołana przeze mnie'],['nieobecnosc','nieobecność bez odwołania']];
+const STATUS_TXT=Object.fromEntries(STATUSES);
+const C=Object.assign({psycholog:'',nrWpisu:'',gabinet:'',adres:'',kontakt:'',miejsca:['Gabinet','Online'],cenaSesji:200,cenaPary:250,czasSesji:50,prefiksKodu:'P',motyw:'szalwia',kolory:null,stopka:'',demo:false,google:false},window.PLANER_CONFIG||{});
+const DEMO=!!C.demo||location.hash==='#demo';
+const MODES=C.miejsca&&C.miejsca.length?C.miejsca:['Gabinet','Online'];
+const PSTAT=[['aktywny','aktywny'],['oczekujacy','oczekujący'],['zakonczony','zakończony']];
+const GROUPS=['dziecko','nastolatek','dorosły','senior','para','rodzina'];
+const COLORS=['#7A8F73','#D4A88C','#9FB0CC','#C98A6B','#B98A86','#BFA26A','#8FA8A0','#6E7FA3','#C9B26E','#A3876A'];
+const INTERVIEW=[['history','Historia problemu'],['family','Sytuacja rodzinna i relacje'],['edu','Edukacja / praca'],['health','Zdrowie, leczenie, leki'],['resources','Zasoby i mocne strony'],['risk','Czynniki ryzyka / bezpieczeństwo'],['expect','Oczekiwania wobec pomocy']];
+const OPF=[['purpose','Cel opinii / pytanie diagnostyczne'],['recipient','Adresat (instytucja)'],['basis','Podstawa (na czyj wniosek)'],['dates','Daty spotkań diagnostycznych'],['methods','Zastosowane metody i narzędzia'],['observation','Obserwacja i zachowanie w badaniu'],['results','Wyniki badań'],['conclusions','Wnioski'],['recommendations','Zalecenia']];
+const ID_FIELDS=[['first','Imię (imiona)'],['last','Nazwisko'],['birth','Data urodzenia','date'],['pesel','PESEL'],['doc','Dokument tożsamości (gdy brak PESEL)'],['address','Adres zamieszkania'],['guardian','Przedstawiciel ustawowy (małoletni / ubezwłasnowolniony)'],['phone','Telefon','tel'],['email','E-mail','email']];
+
+/* ---------- szyfrowanie ---------- */
+const TE=new TextEncoder(),TD=new TextDecoder();
+const b64=u8=>{let s='';for(let i=0;i<u8.length;i+=0x8000)s+=String.fromCharCode.apply(null,u8.subarray(i,i+0x8000));return btoa(s)};
+const unb64=s=>{const b=atob(s),u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u};
+async function deriveKey(pw,salt){const base=await crypto.subtle.importKey('raw',TE.encode(pw),'PBKDF2',false,['deriveKey']);
+  return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:310000,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])}
+async function encryptObj(key,salt,obj){const iv=crypto.getRandomValues(new Uint8Array(12));
+  const ct=new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM',iv},key,TE.encode(JSON.stringify(obj))));
+  return{app:'planer-gabinetu',v:1,saved:new Date().toISOString(),salt:b64(salt),iv:b64(iv),ct:b64(ct)}}
+async function decryptObj(key,blob){const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:unb64(blob.iv)},key,unb64(blob.ct));return JSON.parse(TD.decode(pt))}
+
+/* ---------- IndexedDB ---------- */
+const idb={db:null,
+  open(){return new Promise((res,rej)=>{const r=indexedDB.open('planer-gabinetu',1);r.onupgradeneeded=()=>r.result.createObjectStore('kv');r.onsuccess=()=>{this.db=r.result;res()};r.onerror=()=>rej(r.error)})},
+  get(k){return new Promise((res,rej)=>{const q=this.db.transaction('kv').objectStore('kv').get(k);q.onsuccess=()=>res(q.result);q.onerror=()=>rej(q.error)})},
+  set(k,v){return new Promise((res,rej)=>{const tx=this.db.transaction('kv','readwrite');tx.objectStore('kv').put(v,k);tx.oncomplete=()=>res();tx.onerror=()=>rej(tx.error)})},
+  del(k){return new Promise((res,rej)=>{const tx=this.db.transaction('kv','readwrite');tx.objectStore('kv').delete(k);tx.oncomplete=()=>res();tx.onerror=()=>rej(tx.error)})}};
+
+/* ---------- stan ---------- */
+let K=null,SALT=null,S=null,saveT=null,lastAct=Date.now(),vaultOpenUntil=0;
+const V={view:'home',date:today(),pid:null,ptab:'przeglad',pfilter:'aktywny',q:''};
+const DEF=()=>({ver:1,patients:[],sessions:[],days:{},weeks:{},months:{},identity:{},nameMap:{},
+  settings:{psychName:C.psycholog,nrWpisu:C.nrWpisu,podmiot:C.gabinet,kontakt:C.kontakt,theme:C.motyw,feePara:C.cenaPary,
+    adres:C.adres,fee:C.cenaSesji,dur:C.czasSesji,codePrefix:C.prefiksKodu,autoLock:10,dayStart:8,dayEnd:20,
+    gcalClientId:'',gcalCalendarId:'primary',lastBackup:null}});
+let save=function(){clearTimeout(saveT);saveT=setTimeout(async()=>{if(!K||!S)return;
+  try{await idb.set('vault',await encryptObj(K,SALT,S))}catch(e){toast('Błąd zapisu: '+e.message)}},350)}
+const pat=id=>S.patients.find(p=>p.id===id);
+const sessOn=d=>S.sessions.filter(s=>s.date===d).sort((a,b)=>a.time.localeCompare(b.time));
+const sessOf=pid=>S.sessions.filter(s=>s.patientId===pid).sort((a,b)=>(b.date+b.time).localeCompare(a.date+a.time));
+const day=d=>S.days[d]||(S.days[d]={prio:[],energy:0,reflection:'',gratitude:''});
+const isCancel=s=>s.status.startsWith('odw')||s.status==='nieobecnosc';
+const stClass=s=>s.status==='odbyta'?'odbyta':s.status.startsWith('odw')?'odw':s.status==='nieobecnosc'?'nb':'';
+
+/* =====================================================================
+   BLOKADA / ODBLOKOWANIE
+   ===================================================================== */
+async function showLock(){
+  $('#app').hidden=true;$('#lock').hidden=false;
+  const blob=await idb.get('vault');
+  if(!blob){
+    $('#lock').innerHTML=`<form class="lockcard" id="setupForm">
+      <h1>Planer Gabinetu</h1><div class="sub">pierwsze uruchomienie</div>
+      <div class="note">Ustal hasło do planera. Wszystkie dane (kody, notatki, sejf tożsamości) zostaną <b>zaszyfrowane tym hasłem</b> i zapisane tylko na tym urządzeniu.<br><b>Hasła nie da się odzyskać.</b> Zapisz je w bezpiecznym miejscu.</div>
+      <label>Hasło (min. 10 znaków)</label><input type="password" id="pw1" autocomplete="new-password" required minlength="10">
+      <label>Powtórz hasło</label><input type="password" id="pw2" autocomplete="new-password" required>
+      <div class="err" id="lockErr"></div>
+      <button class="btn or" style="width:100%">Utwórz zaszyfrowany planer</button>
+      <hr class="dash"><button type="button" class="linkbtn" data-act="restoreFromLock">Mam kopię zapasową, chcę ją przywrócić</button>
+    </form>`;
+    $('#setupForm').onsubmit=async e=>{e.preventDefault();const a=$('#pw1').value,b=$('#pw2').value;
+      if(a.length<10)return $('#lockErr').textContent='Hasło musi mieć co najmniej 10 znaków.';
+      if(a!==b)return $('#lockErr').textContent='Hasła się różnią.';
+      $('#lockErr').textContent='Szyfruję…';
+      SALT=crypto.getRandomValues(new Uint8Array(16));K=await deriveKey(a,SALT);S=DEF();
+      await idb.set('vault',await encryptObj(K,SALT,S));
+      try{await navigator.storage?.persist?.()}catch(_){}
+      openApp()};
+  }else{
+    $('#lock').innerHTML=`<form class="lockcard" id="unlockForm">
+      <h1>Planer Gabinetu</h1><div class="sub">${esc(fmtLong(today()))}</div>
+      <label>Hasło</label><input type="password" id="pw" autocomplete="current-password" autofocus required>
+      <div class="err" id="lockErr"></div>
+      <button class="btn or" style="width:100%">Otwórz planer</button>
+      <hr class="dash"><button type="button" class="linkbtn" data-act="restoreFromLock">Przywróć z kopii zapasowej</button>
+    </form>`;
+    setTimeout(()=>$('#pw')?.focus(),50);
+    $('#unlockForm').onsubmit=async e=>{e.preventDefault();$('#lockErr').textContent='Odszyfrowuję…';
+      try{SALT=unb64(blob.salt);K=await deriveKey($('#pw').value,SALT);S=await decryptObj(K,blob);
+        S=Object.assign(DEF(),S);S.settings=Object.assign(DEF().settings,S.settings);openApp()}
+      catch(_){K=null;S=null;$('#lockErr').textContent='Nieprawidłowe hasło.';}};
+  }
+}
+function lockApp(){closeWriter();if(S)save();setTimeout(()=>{K=null;S=null;vaultOpenUntil=0;G.token=null;$('#view').innerHTML='';closeModal();showLock()},400)}
+function openApp(){$('#lock').hidden=true;$('#lock').innerHTML='';$('#app').hidden=false;lastAct=Date.now();V.date=today();V.view='home';render()}
+['pointerdown','keydown','scroll'].forEach(ev=>addEventListener(ev,()=>lastAct=Date.now(),{passive:true}));
+setInterval(()=>{if(!DEMO&&S&&Date.now()-lastAct>(S.settings.autoLock||10)*60000)lockApp();
+  const c=$('#clock');if(c&&S)c.textContent=nowHM()},20000);
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&S)save()});
+
+/* =====================================================================
+   RENDER
+   ===================================================================== */
+const TABS=[['home','Home'],['day','Dziś'],['week','Tydzień'],['month','Miesiąc'],['patients','Pacjenci'],['opinions','Opinie'],['settings','Ustawienia']];
+const THEMES=[['szalwia','Szałwia'],['roz','Pudrowy róż'],['granat','Granat i złoto']];
+function applyTheme(){if(C.kolory)Object.entries(C.kolory).forEach(([k,v])=>document.body.style.setProperty('--'+k,v));const t=(S&&S.settings.theme)||localStorage.getItem('pg-theme')||'szalwia';document.body.dataset.theme=t;try{localStorage.setItem('pg-theme',t)}catch(_){}}
+function render(){
+  if(!S)return;
+  applyTheme();const darkIdx=document.body.dataset.theme==='granat'?[0,1]:[0];
+  $('#tabs').innerHTML=TABS.map(([k,t],i)=>`<button class="tab ${V.view===k||(k==='patients'&&V.view==='patient')?'on':''}" style="--c:var(--tab${i});--fg:${darkIdx.includes(i)?'#fff':'var(--ink)'}" data-act="go" data-v="${k}">${t}</button>`).join('');
+  $('#clock').textContent=nowHM();
+  renderBanners();
+  const f={intakes:vIntakes,home:vHome,day:vDay,week:vWeek,month:vMonth,patients:vPatients,patient:vPatient,opinions:vOpinions,settings:vSettings}[V.view];
+  $('#view').innerHTML=f();
+  bindPads();decorateWriting();
+}
+function renderBanners(){
+  const b=[];const lb=S.settings.lastBackup;
+  const days=lb?Math.floor((Date.now()-new Date(lb))/864e5):null;
+  if(days===null||days>=7)b.push(`<div class="banner"><b>Kopia zapasowa:</b> ${days===null?'jeszcze nie wykonano':'ostatnia '+days+' dni temu'}. Dane są tylko na tym urządzeniu. <button class="btn sm" data-act="backupNow">Zrób kopię teraz</button></div>`);
+  const dirty=S.sessions.filter(s=>s.gcalDirty).length;
+  $('#syncInfo').innerHTML=S.settings.gcalClientId&&dirty?`<button class="btn sm bl" data-act="gcalSyncAll">Kalendarz Google: ${dirty} do wysłania</button>`:'';
+  $('#banners').innerHTML=b.join('');
+}
+function chip(s,showDate){const p=pat(s.patientId);return `<button class="chip ${stClass(s)}" style="--c:${p?.color||'#999'}" data-act="openSession" data-id="${s.id}">
+  <b>${showDate?esc(fmtShort(s.date))+' ':''}${esc(s.time)}</b><span class="code">${esc(p?.code||'?')}</span><span class="small">${esc(s.type)}${s.mode==='Online'?' · online':''}</span><span class="st">${esc(STATUS_TXT[s.status]||s.status)}</span></button>`}
+
+/* ---------- HOME ---------- */
+const ICON={day:'M4 5h16v15H4zM4 9h16M8 3v4M16 3v4M8 13h3v3H8z',week:'M4 5h16v15H4zM4 9h16M9 9v11M14 9v11M8 3v4M16 3v4',month:'M4 5h16v15H4zM4 9h16M4 13.5h16M4 17h16M9 9v11M14 9v11',
+  people:'M9 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM2.5 20c.6-3.4 3.3-5.5 6.5-5.5s5.9 2.1 6.5 5.5M16 4.5a3.3 3.3 0 0 1 0 6.3M18 14.6c2 .7 3.2 2.6 3.5 5.4',pen:'M4 20h4L19 9l-4-4L4 16v4zM13.5 6.5l4 4',
+  doc:'M6 3h9l4 4v14H6zM14 3v5h5M9 12h7M9 16h7',test:'M9 3h6M10 3v6L5 18a2 2 0 0 0 1.8 3h10.4A2 2 0 0 0 19 18l-5-9V3M7.5 14h9',pay:'M3 7h18v11H3zM3 11h18M7 15h3',
+  sync:'M4 12a8 8 0 0 1 13.7-5.7L20 8M20 4v4h-4M20 12a8 8 0 0 1-13.7 5.7L4 16M4 20v-4h4',lock:'M5 11h14v10H5zM8 11V7a4 4 0 0 1 8 0v4'};
+const svg=(d,c='currentColor',w=22)=>`<svg width="${w}" height="${w}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
+function vHome(){const t=today(),ss=sessOn(t).filter(s=>!isCancel(s));
+  const noNote=S.sessions.filter(s=>s.status==='odbyta'&&!s.note);const drafts=S.patients.flatMap(p=>(p.opinions||[]).filter(o=>!o.final));
+  const unpaid=S.sessions.filter(s=>s.status==='odbyta'&&!s.paid&&(Number(s.fee)||0)>0);
+  const ws=weekStart(t),wk=[...Array(7)].map((_,i)=>addDays(ws,i)).flatMap(sessOn).filter(s=>!isCancel(s)).length;
+  const d=parseYmd(V.date),y=d.getFullYear(),m=d.getMonth(),ym=`${y}-${pad(m+1)}`;
+  const first=new Date(y,m,1),lead=(first.getDay()+6)%7,dim=new Date(y,m+1,0).getDate();
+  const cal=[...Array(lead)].map(()=>'<span></span>').join('')+[...Array(dim)].map((_,i)=>{const ds=`${ym}-${pad(i+1)}`;const has=S.sessions.some(s=>s.date===ds&&!isCancel(s));
+    return `<button class="${ds===t?'on':''} ${has?'has':''}" data-act="openDay" data-d="${ds}">${i+1}</button>`}).join('');
+  const active=S.patients.filter(p=>p.status==='aktywny').length,dxN=S.patients.filter(p=>p.intake).length;
+  const tiles=[['Dziś',`${ss.length} sesji · ${noNote.filter(s=>s.date===t).length} do opisania`,ICON.day,'go','day','var(--soft2)'],
+    ['Tydzień',`${wk} sesji w tym tygodniu`,ICON.week,'go','week','var(--soft3)'],['Miesiąc','kalendarz i statystyki',ICON.month,'go','month','#fff'],
+    ['Pacjenci',`${active} aktywnych kodów`,ICON.people,'go','patients','var(--soft3)'],['Do opisania',`${noNote.length} sesji bez opisu`,ICON.pen,'go','day','#fff'],
+    ['Opinie',`${drafts.length} szkiców`,ICON.doc,'go','opinions','var(--soft2)'],['Pierwsze wizyty',`${dxN} wywiadów`,ICON.test,'go','intakes','#fff'],
+    ['Płatności',`${unpaid.length} nieopłaconych`,ICON.pay,'go','month','var(--soft2)'],['Kopia zapasowa','zaszyfrowany plik',ICON.lock,'backupNow','','var(--soft3)']];
+  return `<div class="home"><section>
+    <div class="hero"><h1>Planer<br><i>Gabinetu</i></h1><p>${esc(S.settings.podmiot)}</p></div>
+    <div class="kpis"><button class="kpi" data-act="go" data-v="day"><b>${ss.length}</b><span>sesji dziś</span></button>
+     <button class="kpi" data-act="go" data-v="day"><b style="color:var(--accent)">${noNote.length}</b><span>do opisania</span></button>
+     <button class="kpi" data-act="go" data-v="opinions"><b>${drafts.length}</b><span>opinii w toku</span></button></div>
+    <div class="card"><div style="display:flex;align-items:baseline;justify-content:space-between"><h3>${MIES[m]} ${y}</h3>
+      <span><button class="linkbtn" data-act="shiftMonth" data-n="-1">‹</button> <button class="linkbtn" data-act="shiftMonth" data-n="1">›</button></span></div>
+     <div class="mcal">${DNI_K.map(x=>`<span class="dw">${x}</span>`).join('')}${cal}</div></div>
+   </section><section>
+    <div style="display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:14px">
+     <h2 style="font-size:34px">Spis treści</h2><span style="font-family:var(--hand);font-size:22px;color:var(--accent)">${esc(DNI[dow(t)])}, ${parseYmd(t).getDate()}.${pad(parseYmd(t).getMonth()+1)}</span></div>
+    <nav class="tiles" aria-label="Spis treści">${tiles.map(([l,sub,ic,act,v,bg])=>`<button class="tile" style="--c:${bg};${bg==='#fff'?'border:1px solid var(--line)':''}" data-act="${act}" data-v="${v}"><span class="ic">${svg(ic,'var(--ink)')}</span><span><b>${l}</b><span>${sub}</span></span></button>`).join('')}</nav>
+    <p class="small muted" style="display:flex;gap:8px;align-items:center;margin-top:14px">${svg(ICON.lock,'var(--muted)',15)} Dane zaszyfrowane na tym urządzeniu · ostatnia kopia: ${S.settings.lastBackup?Math.floor((Date.now()-new Date(S.settings.lastBackup))/864e5)+' dni temu':'brak'}</p>
+   </section></div>`}
+
+/* ---------- WYWIADY ---------- */
+function vIntakes(){const rows=S.patients.slice().sort((a,b)=>a.code.localeCompare(b.code,'pl',{numeric:true}));
+  const withI=rows.filter(p=>p.intake),without=rows.filter(p=>!p.intake&&p.status!=='zakonczony');
+  return `<div class="pagehead"><h1>Wywiady – pierwsze wizyty</h1><button class="btn or" data-act="newIntake">+ Nowy pacjent i wywiad</button></div>
+   <div class="card"><h3>Przeprowadzone wywiady</h3>${withI.length?`<div class="list">${withI.map(p=>{const R=KLIN.analyze(p.intake);
+     return `<div class="item" data-act="openIntake" data-id="${p.id}"><b style="min-width:70px;font-family:var(--serif);font-size:20px;color:var(--deep)">${esc(p.code)}</b>
+      <span class="grow"><span class="small">${esc(KLIN.TEMPLATES[p.intake.tpl].name)} · ${esc(fmtShort(p.intake.date))}</span><br><span class="small muted ellip" style="display:block">${esc(R.findings.filter(f=>f.id!=='none').map(f=>f.area).join(', '))}</span></span>
+      ${R.s.phqDone?`<span class="badge">PHQ-9 ${R.s.phq}</span>`:''}${R.s.gadDone?`<span class="badge">GAD-7 ${R.s.gad}</span>`:''}${R.risk.lvl>=2?'<span class="badge" style="background:#F8E1DC">ryzyko</span>':''}</div>`}).join('')}</div>`:'<p class="muted">Brak wywiadów.</p>'}</div>
+   <div class="card"><h3>Aktywni pacjenci bez wywiadu</h3>${without.length?`<div class="list">${without.map(p=>`<div class="item" data-act="openIntake" data-id="${p.id}"><b style="min-width:70px">${esc(p.code)}</b><span class="grow small muted">${esc(p.group)} · od ${esc(fmtShort(p.start))}</span><span class="small">rozpocznij wywiad →</span></div>`).join('')}</div>`:'<p class="muted">Wszyscy aktywni pacjenci mają wywiad.</p>'}</div>`}
+
+/* ---------- DZIEŃ ---------- */
+function vDay(){
+  const d=V.date,D=day(d),ss=sessOn(d),st=S.settings,t=today(),dd=parseYmd(d),ws=weekStart(d);
+  let hours='';for(let h=st.dayStart;h<=st.dayEnd;h++){const hh=pad(h);
+    const here=ss.filter(s=>s.time.slice(0,2)===hh||(h===st.dayStart&&Number(s.time.slice(0,2))<h)||(h===st.dayEnd&&Number(s.time.slice(0,2))>h));
+    hours+=`<div class="hour" data-act="newAt" data-time="${hh}:00"><div class="h">${h}:00</div><div class="slot">${here.map(s=>chip(s)).join('')}</div></div>`}
+  const toConfirm=S.sessions.filter(s=>s.status==='zaplanowana'&&(s.date<t||(s.date===t&&addMin(s.date,s.time,s.dur).time<=nowHM()))).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));
+  const noNote=S.sessions.filter(s=>s.status==='odbyta'&&!s.note&&s.date>=addDays(t,-30));
+  const done=ss.filter(s=>s.status==='odbyta'),sum=done.reduce((a,s)=>a+(Number(s.fee)||0),0),unp=done.filter(s=>!s.paid);
+  return `<div class="pagehead"><span class="bigday">${dd.getDate()}</span><div style="flex:1;min-width:180px"><div class="dayname">${DNI[dow(d)]}</div><div class="eyebrow" style="margin-top:4px">${MIES[dd.getMonth()]} ${dd.getFullYear()} · gabinet</div></div>
+    <button class="navbtn" data-act="shift" data-n="-1" aria-label="Poprzedni dzień">‹</button><button class="navbtn" data-act="shift" data-n="1" aria-label="Następny dzień">›</button>${d!==t?'<button class="btn sm" data-act="toToday">dziś</button>':''}
+    <button class="btn or" data-act="newSession">+ Sesja</button></div>
+  <div class="daycols">
+   <section><div class="weekstrip">${[...Array(7)].map((_,i)=>{const x=addDays(ws,i);return `<button class="${x===d?'on':''}" data-act="openDay" data-d="${x}"><span>${DNI_K[i]}</span><b>${parseYmd(x).getDate()}</b></button>`}).join('')}</div>
+     <div class="sched">${hours}</div>
+     <div class="small muted" style="margin-top:6px">Dotknij godziny, aby dodać sesję.</div></section>
+   <aside>
+    ${toConfirm.length?`<div class="sticky" style="--c:var(--soft3)"><h3>Czy się odbyły?</h3>${toConfirm.slice(0,8).map(s=>`<div class="todo"><span><b>${esc(fmtShort(s.date))} ${esc(s.time)}</b> · ${esc(pat(s.patientId)?.code||'?')}</span>
+      <button class="btn sm or" data-act="quickStatus" data-id="${s.id}" data-s="odbyta">tak</button><button class="btn sm" data-act="openSession" data-id="${s.id}">inne…</button></div>`).join('')}</div>`:''}
+    <div class="row" style="align-items:stretch;margin-bottom:14px">
+     <div class="sticky" style="--c:var(--soft3);margin:0"><div class="eyebrow">Do opisania</div>${noNote.length?noNote.slice(0,4).map(s=>`<div class="todo"><span><b>${esc(pat(s.patientId)?.code||'?')}</b> · ${esc(fmtShort(s.date))}</span><button class="linkbtn" data-act="openSession" data-id="${s.id}">opisz</button></div>`).join(''):'<p class="small">Wszystko opisane.</p>'}</div>
+     <div class="sticky" style="--c:var(--soft2);margin:0"><div class="eyebrow">Płatności dziś</div><div class="bigday" style="font-size:36px">${money(sum)}</div><div class="small">${unp.length?unp.length+' nieopłacona · '+unp.map(s=>esc(pat(s.patientId)?.code||'?')).join(', '):'wszystkie opłacone'}</div></div></div>
+    <div class="card"><h3>Zadania gabinetu</h3>
+      ${D.prio.map((x,i)=>`<div class="todo ${x.done?'done':''}"><input type="checkbox" ${x.done?'checked':''} data-act="prioToggle" data-i="${i}"><span>${esc(x.t)}</span><button class="linkbtn" data-act="prioDel" data-i="${i}">×</button></div>`).join('')}
+      <form data-form="prioAdd" class="row" style="margin-top:8px"><input type="text" name="t" placeholder="dodaj zadanie…"><button class="btn sm auto">+</button></form></div>
+    <div class="card"><h3>Notatki dnia</h3><textarea class="lined" data-bind="day:reflection" rows="4">${esc(D.reflection)}</textarea></div>
+   </aside></div>`;
+}
+/* ---------- TYDZIEŃ ---------- */
+function vWeek(){
+  const ws=weekStart(V.date),t=today();const W=S.weeks[ws]||(S.weeks[ws]={focus:''});
+  const days=[...Array(7)].map((_,i)=>addDays(ws,i));
+  const all=days.flatMap(sessOn);const ok=all.filter(s=>!isCancel(s));
+  return `<div class="pagehead"><button class="navbtn" data-act="shift" data-n="-7">‹</button>
+   <h1>Tydzień ${parseYmd(ws).getDate()} ${MIES_D[parseYmd(ws).getMonth()]} – ${parseYmd(days[6]).getDate()} ${MIES_D[parseYmd(days[6]).getMonth()]}</h1>
+   <button class="navbtn" data-act="shift" data-n="7">›</button><button class="btn sm" data-act="toToday">ten tydzień</button><button class="btn or" data-act="newSession">+ Sesja</button></div>
+  <div class="week">${days.map(d=>`<div class="wcol ${d===t?'today':''}"><div class="whead" data-act="openDay" data-d="${d}">${DNI_K[dow(d)]} <span class="n">${parseYmd(d).getDate()}</span></div>${sessOn(d).map(s=>chip(s)).join('')}</div>`).join('')}</div>
+  <div class="stats"><div class="stat"><b>${ok.length}</b>sesji</div><div class="stat"><b>${all.filter(s=>s.status==='odbyta').length}</b>odbytych</div><div class="stat"><b>${all.filter(isCancel).length}</b>odwołań</div><div class="stat"><b>${new Set(ok.map(s=>s.patientId)).size}</b>pacjentów</div></div>
+  <div class="cloud"><h3>Notatki tygodnia</h3><textarea class="lined" rows="3" data-bind="week:focus">${esc(W.focus)}</textarea></div>`;
+}
+/* ---------- MIESIĄC ---------- */
+function vMonth(){
+  const d=parseYmd(V.date),y=d.getFullYear(),m=d.getMonth(),ym=`${y}-${pad(m+1)}`,t=today();
+  const M=S.months[ym]||(S.months[ym]={intent:''});
+  const first=ymd(new Date(y,m,1));let cur=weekStart(first);const cells=[];
+  do{for(let i=0;i<7;i++){cells.push(cur);cur=addDays(cur,1)}}while(parseYmd(cur).getMonth()===m);
+  const ms=S.sessions.filter(s=>s.date.startsWith(ym));const done=ms.filter(s=>s.status==='odbyta');
+  const income=done.reduce((a,s)=>a+(Number(s.fee)||0),0),unpaid=done.filter(s=>!s.paid);
+  return `<div class="pagehead"><button class="navbtn" data-act="shiftMonth" data-n="-1">‹</button><h1>${MIES[m]} ${y}</h1>
+   <button class="navbtn" data-act="shiftMonth" data-n="1">›</button><button class="btn sm" data-act="toToday">ten miesiąc</button></div>
+  <div class="month">${DNI_K.map(x=>`<div class="mdow">${x}</div>`).join('')}
+   ${cells.map(c=>{const cs=sessOn(c).filter(s=>!isCancel(s));return `<div class="mcell ${parseYmd(c).getMonth()!==m?'out':''} ${c===t?'today':''}" data-act="openDay" data-d="${c}">
+     <span class="d">${parseYmd(c).getDate()}</span>${cs.length?` <span class="badge">${cs.length}</span>`:''}
+     ${cs.slice(0,3).map(s=>`<span class="mini" style="--c:${pat(s.patientId)?.color||'#999'}">${esc(s.time)} ${esc(pat(s.patientId)?.code||'?')}</span>`).join('')}${cs.length>3?`<span class="small">+${cs.length-3}</span>`:''}</div>`}).join('')}</div>
+  <div class="stats"><div class="stat"><b>${done.length}</b>odbytych sesji</div><div class="stat"><b>${ms.filter(isCancel).length}</b>odwołań / nieob.</div>
+   <div class="stat"><b>${money(income)}</b>za odbyte</div><div class="stat"><b>${unpaid.length}</b>nieopłaconych</div></div>
+  ${unpaid.length?`<div class="card"><h3>Nieopłacone</h3><div class="list">${unpaid.map(s=>`<div class="item" data-act="openSession" data-id="${s.id}"><span class="grow">${esc(fmtShort(s.date))} · ${esc(pat(s.patientId)?.code||'?')} · ${esc(s.type)}</span><b>${money(s.fee)}</b></div>`).join('')}</div></div>`:''}
+  <div class="cloud"><h3>Notatki miesiąca</h3><textarea class="lined" rows="3" data-bind="month:intent" data-ym="${ym}">${esc(M.intent)}</textarea></div>`;
+}
+/* ---------- PACJENCI ---------- */
+function vPatients(){
+  const q=V.q.trim().toLowerCase();const t=today();
+  const list=S.patients.filter(p=>(V.pfilter==='all'||p.status===V.pfilter)&&(!q||p.code.toLowerCase().includes(q)||(p.tags||'').toLowerCase().includes(q))).sort((a,b)=>a.code.localeCompare(b.code,'pl',{numeric:true}));
+  return `<div class="pagehead"><h1>Pacjenci</h1><button class="btn or" data-act="newPatient">+ Nowy pacjent</button></div>
+  <div class="row" style="margin-bottom:12px"><input type="text" placeholder="szukaj po kodzie lub tagu…" value="${esc(V.q)}" data-act-input="search">
+   <select class="auto" data-act-change="pfilter" style="width:auto">${[['aktywny','aktywni'],['oczekujacy','oczekujący'],['zakonczony','zakończeni'],['all','wszyscy']].map(([k,t])=>`<option value="${k}" ${V.pfilter===k?'selected':''}>${t}</option>`).join('')}</select></div>
+  ${list.length?`<div class="pgrid">${list.map(p=>{const ss=sessOf(p.id);const next=ss.filter(s=>s.date>=t&&s.status==='zaplanowana').pop();const last=ss.find(s=>s.status==='odbyta');
+    return `<button class="pcard" style="--c:${p.color}" data-act="openPatient" data-id="${p.id}"><div class="code">${esc(p.code)}</div>
+     <span class="badge ${p.status}">${esc(Object.fromEntries(PSTAT)[p.status])}</span><span class="badge">${esc(p.group)}</span>
+     <div class="small" style="margin-top:6px">${next?'następna: <b>'+esc(fmtShort(next.date))+' '+esc(next.time)+'</b>':'brak zaplanowanej'}<br>${last?'ostatnia: '+esc(fmtShort(last.date)):''} · sesji: ${ss.filter(s=>s.status==='odbyta').length}</div>
+     ${p.tags?`<div class="small muted ellip">${esc(p.tags)}</div>`:''}</button>`}).join('')}</div>`
+   :`<div class="cloud">Brak pacjentów w tym widoku. Dodaj pierwszego. Każdy pacjent ma tylko swój kod, a dane tożsamości trafiają do zaszyfrowanego sejfu.</div>`}`;
+}
+function retentionInfo(p){
+  if(p.status!=='zakonczony'||!p.end)return null;
+  let y=parseYmd(p.end).getFullYear()+5;
+  const id=S.identity[p.id];
+  if(id?.birth){const adult=parseYmd(id.birth).getFullYear()+18;if(adult+5>y)y=adult+5}
+  return `${y}-12-31`;
+}
+function vPatient(){
+  const p=pat(V.pid);if(!p){V.view='patients';return vPatients()}
+  const tabs=[['przeglad','Przegląd'],['pierwsza','Pierwsza wizyta'],['sesje','Sesje'],['icd','Rozpoznania ICD/DSM'],['wywiad','Notatki z wywiadu'],['diagnoza','Diagnoza'],['opinie','Opinie'],['sejf','Sejf tożsamości']];
+  let body='';
+  if(V.ptab==='przeglad'){const ret=retentionInfo(p);
+    body=`<div class="grid2">
+     <div><label>Kod pacjenta</label><input type="text" value="${esc(p.code)}" data-bind="p:code"></div>
+     <div><label>Status</label><select data-bind="p:status">${PSTAT.map(([k,t])=>`<option value="${k}" ${p.status===k?'selected':''}>${t}</option>`).join('')}</select></div>
+     <div><label>Grupa</label><select data-bind="p:group">${GROUPS.map(g=>`<option ${p.group===g?'selected':''}>${g}</option>`).join('')}</select></div>
+     <div><label>Forma</label><select data-bind="p:mode">${MODES.map(g=>`<option ${p.mode===g?'selected':''}>${g}</option>`).join('')}</select></div>
+     <div><label>Początek współpracy</label><input type="date" value="${esc(p.start)}" data-bind="p:start"></div>
+     <div><label>Zakończenie</label><input type="date" value="${esc(p.end)}" data-bind="p:end"></div>
+     <div><label>Stawka za sesję (zł)</label><input type="number" value="${esc(p.fee)}" data-bind="p:fee"></div>
+     <div><label>Tagi (bez danych osobowych)</label><input type="text" value="${esc(p.tags)}" data-bind="p:tags" placeholder="np. lęk, DDA, szkoła"></div></div>
+     <label>Kolor</label><div class="colors">${COLORS.map(c=>`<button style="background:${c}" class="${p.color===c?'on':''}" data-act="pColor" data-c="${c}" aria-label="kolor"></button>`).join('')}</div>
+     <label>Powód zgłoszenia</label><textarea class="lined" data-bind="p:reason">${esc(p.reason)}</textarea>
+     <label>Cele terapii / pomocy</label><textarea class="lined" data-bind="p:goals">${esc(p.goals)}</textarea>
+     <label>Plan pracy / kontrakt</label><textarea class="lined" data-bind="p:plan">${esc(p.plan)}</textarea>
+     <label>Ważne – pamiętaj</label><textarea class="lined" rows="2" data-bind="p:important" style="border-color:var(--accent)">${esc(p.important)}</textarea>
+     ${ret?`<div class="note">Dokumentację przechowuj do <b>${esc(fmtShort(ret))}</b> (5 lat od końca roku zakończenia świadczeń; u małoletnich 5 lat od końca roku uzyskania pełnoletności), potem zniszcz ją z protokołem.</div>`:''}
+     <div class="mfoot" style="justify-content:flex-start"><button class="btn or" data-act="newSession" data-pid="${p.id}">+ Sesja</button>
+      <button class="btn" data-act="printDoc">Drukuj dokumentację (art. 28)</button><span class="sp"></span><button class="btn danger sm" data-act="delPatient">Usuń pacjenta</button></div>`;
+  }else if(V.ptab==='pierwsza'){body=vIntake(p);
+  }else if(V.ptab==='icd'){body=vIcd(p);
+  }else if(V.ptab==='sesje'){const ss=sessOf(p.id);
+    body=`<div class="row" style="margin-bottom:10px"><button class="btn or auto" data-act="newSession" data-pid="${p.id}">+ Sesja</button><span class="small muted">Odbytych: ${ss.filter(s=>s.status==='odbyta').length} · odwołanych: ${ss.filter(isCancel).length}</span></div>
+     <div class="list">${ss.map(s=>`<div class="item" data-act="openSession" data-id="${s.id}"><b style="width:120px">${esc(fmtShort(s.date))} ${esc(s.time)}</b>
+      <span class="grow"><span class="badge">${esc(STATUS_TXT[s.status])}</span> ${esc(s.type)}<br><span class="small muted ellip" style="display:block">${esc((s.note||'').slice(0,140))||'— brak opisu —'}</span></span>${s.sketch?'<span class="badge">szkic</span>':''}</div>`).join('')||'<p class="muted">Brak sesji.</p>'}</div>`;
+  }else if(V.ptab==='wywiad'){
+    body=`<p class="small muted">Wywiad wstępny – uzupełniaj na bieżąco. Te pola możesz dołączyć do szkicu opinii.</p>${INTERVIEW.map(([k,t])=>`<label>${t}</label><textarea class="lined" data-bind="pi:${k}">${esc(p.interview?.[k])}</textarea>`).join('')}`;
+  }else if(V.ptab==='diagnoza'){
+    body=`<div class="row"><button class="btn or auto" data-act="addDiag">+ Badanie / narzędzie</button><span class="small muted">np. NEO-PI-R, wywiad ustrukturyzowany, skale, obserwacja</span></div>
+     ${(p.diag||[]).map((x,i)=>`<div class="card"><div class="row"><div><label>Data</label><input type="date" value="${esc(x.date)}" data-bind="pd:${i}:date"></div><div style="flex:3"><label>Narzędzie / metoda</label><input type="text" value="${esc(x.tool)}" data-bind="pd:${i}:tool"></div></div>
+       <label>Wyniki (surowe / steny / centyle)</label><textarea class="lined" data-bind="pd:${i}:results">${esc(x.results)}</textarea>
+       <label>Interpretacja</label><textarea class="lined" data-bind="pd:${i}:interp">${esc(x.interp)}</textarea>
+       <div style="text-align:right"><button class="btn danger sm" data-act="delDiag" data-i="${i}">usuń</button></div></div>`).join('')}`;
+  }else if(V.ptab==='opinie'){
+    body=`<button class="btn or" data-act="newOpinion">+ Nowa opinia</button>
+     <div class="list" style="margin-top:10px">${(p.opinions||[]).map(o=>`<div class="item" data-act="openOpinion" data-id="${o.id}"><b>${esc(fmtShort(o.date))}</b><span class="grow ellip">${esc(o.purpose||'opinia psychologiczna')} ${o.recipient?'→ '+esc(o.recipient):''}</span>${o.final?'<span class="badge aktywny">gotowa</span>':'<span class="badge">szkic</span>'}</div>`).join('')||'<p class="muted">Brak opinii.</p>'}</div>`;
+  }else if(V.ptab==='sejf'){
+    if(Date.now()>vaultOpenUntil){
+      body=`<div class="vault"><h3>Sejf tożsamości jest zamknięty</h3><p>Tu są dane wymagane w dokumentacji psychologicznej (art. 28 ustawy o zawodzie psychologa). Wpisz hasło, aby je zobaczyć (otwiera się na 5 minut).</p>
+       <form data-form="vaultOpen" class="row"><input type="password" name="pw" autocomplete="current-password" placeholder="hasło"><button class="btn or auto">Otwórz sejf</button></form></div>`;
+    }else{const id=S.identity[p.id]||{};
+      body=`<div class="vault"><h3>Sejf tożsamości · ${esc(p.code)}</h3><p class="small">Widoczne tylko tu i na wydruku dokumentacji. Nigdy nie trafia do kalendarza ani do tekstów kopiowanych do opinii.</p>
+       <div class="grid2">${ID_FIELDS.map(([k,t,ty])=>`<div><label>${t}</label><input type="${ty||'text'}" value="${esc(id[k])}" data-bind="id:${k}"></div>`).join('')}</div>
+       <div style="text-align:right;margin-top:10px"><button class="btn sm" data-act="vaultClose">Zamknij sejf</button></div></div>`;
+    }
+  }
+  const nxt=sessOf(p.id).filter(s=>s.date>=today()&&s.status==='zaplanowana').pop();
+  return `<div class="pagehead"><button class="btn sm" data-act="go" data-v="patients">‹ pacjenci</button><span class="eyebrow">Pacjenci › karta</span></div>
+   <div class="phead" style="--c:${p.color}"><div class="ring">${esc(p.code)}</div><div style="flex:1"><div class="dayname" style="font-size:22px">kod pacjenta</div>
+    <div style="margin-top:6px"><span class="badge ${p.status}" style="background:#fff">${esc(Object.fromEntries(PSTAT)[p.status])}</span><span class="badge" style="background:#fff">${esc(p.group)}</span><span class="badge" style="background:#fff">${esc(p.mode)}</span>${p.start?`<span class="badge" style="background:#fff">od ${esc(fmtShort(p.start))}</span>`:''}</div></div>
+    <div class="stat" style="min-width:0"><b>${sessOf(p.id).filter(s=>s.status==='odbyta').length}</b>sesji</div><div class="stat" style="min-width:0"><b>${nxt?esc(fmtShort(nxt.date).slice(0,5)):'–'}</b>następna</div></div>
+   <div class="ptabs">${tabs.map(([k,t])=>`<button class="ptab ${V.ptab===k?'on':''}" data-act="ptab" data-t="${k}">${t}</button>`).join('')}</div>${body}`;
+}
+/* ---------- OPINIE (zbiorczo) ---------- */
+function vOpinions(){
+  const all=S.patients.flatMap(p=>(p.opinions||[]).map(o=>({p,o}))).sort((a,b)=>b.o.date.localeCompare(a.o.date));
+  return `<div class="pagehead"><h1>Opinie psychologiczne</h1></div>
+   <div class="cloud small">Jak to działa: w karcie pacjenta uzupełniasz pola opinii (cel, metody, wyniki, wnioski). Przycisk <b>„Kopiuj tekst”</b> zbiera te informacje w jeden uporządkowany tekst (tylko z kodem pacjenta, bez danych z sejfu), który możesz wkleić, gdzie chcesz. Gotową opinię wpisujesz w pole „Tekst końcowy” i drukujesz na papierze firmowym z danymi z sejfu.</div>
+   <div class="list">${all.map(({p,o})=>`<div class="item" data-act="openOpinion" data-id="${o.id}" data-pid="${p.id}"><b style="width:110px">${esc(fmtShort(o.date))}</b><span class="code" style="font-family:var(--serif);font-weight:600;font-size:22px;width:90px;color:var(--deep)">${esc(p.code)}</span><span class="grow ellip">${esc(o.purpose||'')}</span>${o.final?'<span class="badge aktywny">gotowa</span>':'<span class="badge">szkic</span>'}</div>`).join('')||'<p class="muted">Brak opinii. Utwórz ją w karcie pacjenta → zakładka Opinie.</p>'}</div>`;
+}
+/* ---------- USTAWIENIA ---------- */
+function vSettings(){const s=S.settings;const t=today();
+  const toDestroy=S.patients.map(p=>({p,r:retentionInfo(p)})).filter(x=>x.r&&x.r<t);
+  return `<div class="pagehead"><h1>Ustawienia</h1></div>
+  <div class="card"><h2>Wygląd</h2><label>Motyw kolorystyczny</label><div class="row">${THEMES.map(([k,n])=>`<button class="btn auto ${(s.theme||'szalwia')===k?'or':''}" data-act="setTheme" data-t="${k}">${n}</button>`).join('')}</div></div>
+
+  <div class="card"><h2>Gabinet</h2><div class="grid2">
+   <div><label>Psycholog</label><input type="text" value="${esc(s.psychName)}" data-bind="s:psychName"></div>
+   <div><label>Nr wpisu do Rejestru psychologów</label><input type="text" value="${esc(s.nrWpisu)}" data-bind="s:nrWpisu"></div>
+   <div><label>Podmiot</label><input type="text" value="${esc(s.podmiot)}" data-bind="s:podmiot"></div>
+   <div><label>Adres siedziby</label><input type="text" value="${esc(s.adres)}" data-bind="s:adres"></div>
+   <div><label>Kontakt na wydrukach dla pacjenta</label><input type="text" value="${esc(s.kontakt||'')}" data-bind="s:kontakt" placeholder="telefon / e-mail gabinetu"></div>
+   <div><label>Cena sesji (zł)</label><input type="number" value="${esc(s.fee)}" data-bind="s:fee"></div>
+   <div><label>Cena sesji pary (zł)</label><input type="number" value="${esc(s.feePara)}" data-bind="s:feePara"></div>
+   <div><label>Długość sesji (min)</label><input type="number" value="${esc(s.dur)}" data-bind="s:dur"></div>
+   <div><label>Prefiks kodów</label><input type="text" value="${esc(s.codePrefix)}" data-bind="s:codePrefix"></div>
+   <div class="row"><div><label>Dzień od</label><input type="number" min="5" max="12" value="${s.dayStart}" data-bind="s:dayStart"></div><div><label>do</label><input type="number" min="14" max="23" value="${s.dayEnd}" data-bind="s:dayEnd"></div></div></div></div>
+
+  <div class="card"><h2>Bezpieczeństwo i kopie</h2>
+   <div class="row"><div><label>Automatyczna blokada po (min)</label><input type="number" min="1" max="60" value="${s.autoLock}" data-bind="s:autoLock"></div></div>
+   <p class="small">Ostatnia kopia: <b>${s.lastBackup?new Date(s.lastBackup).toLocaleString('pl-PL'):'brak'}</b>. Kopia to zaszyfrowany plik .json – bez hasła nikt go nie odczyta. Trzymaj ją w dwóch miejscach (np. pendrive w szafce + dysk w chmurze).</p>
+   <div class="row"><button class="btn or auto" data-act="backupNow">Pobierz zaszyfrowaną kopię</button><button class="btn auto" data-act="restore">Przywróć z kopii</button><button class="btn auto" data-act="changePw">Zmień hasło</button></div></div>
+
+  ${C.google?`  <div class="card"><h2>Kalendarz Google</h2>
+   <p class="small">Do Kalendarza trafia tylko <b>kod pacjenta, typ sesji i miejsce</b> – nigdy notatki. Najlepiej użyj osobnego kalendarza, np. „Gabinet”.</p>
+   <div class="grid2"><div><label>OAuth Client ID</label><input type="text" value="${esc(s.gcalClientId)}" data-bind="s:gcalClientId" placeholder="….apps.googleusercontent.com"></div>
+   <div><label>ID kalendarza</label><input type="text" value="${esc(s.gcalCalendarId)}" data-bind="s:gcalCalendarId" placeholder="primary lub …@group.calendar.google.com"></div></div>
+   <div class="row" style="margin-top:10px"><button class="btn bl auto" data-act="gcalConnect">${G.token?'Połączono ✓':'Połącz z Google'}</button>
+    <button class="btn auto" data-act="gcalSyncAll">Wyślij przyszłe sesje</button><button class="btn auto" data-act="gcalPull">Pobierz z Kalendarza</button></div>
+   <p class="hint">„Pobierz” dodaje sesje z wydarzeń, których tytuł zaczyna się od kodu pacjenta (np. „P-014 sesja”), i aktualizuje terminy przesunięte w Google.</p></div>`:''}
+
+  <div class="card"><h2>Pisanie rysikiem</h2>
+   <p class="small">Przy każdym polu notatki jest przycisk <b>Pisz</b> – otwiera duże pole u góry ekranu, a na dole pojawia się klawiatura. Aby pismo odręczne zamieniało się na druk po polsku: zainstaluj <b>Gboard</b>, w Gboard → Języki → Polski zaznacz <b>„Pismo odręczne”</b> i ustaw Gboard jako domyślną klawiaturę. W polu przełącz klawiaturę kulką na pismo odręczne. W ustawieniach Gboard wyłącz udostępnianie statystyk.</p></div>
+
+  <div class="card"><h2>Okres przechowywania</h2>
+   ${toDestroy.length?`<p>Dokumentacja do zniszczenia (minął termin):</p>${toDestroy.map(x=>`<div class="todo"><span><b>${esc(x.p.code)}</b> – termin ${esc(fmtShort(x.r))}</span><button class="btn sm" data-act="openPatient" data-id="${x.p.id}">otwórz</button></div>`).join('')}<p class="hint">Przed usunięciem możesz wydrukować protokół zniszczenia z karty pacjenta.</p>`:'<p class="small">Brak dokumentacji po terminie przechowywania.</p>'}</div>
+
+  <div class="card"><h2>Strefa ryzyka</h2><button class="btn danger" data-act="wipe">Usuń wszystkie dane z tego urządzenia</button></div>
+  ${C.stopka?`<p class="small muted">${esc(C.stopka)}</p>`:''}<p class="small muted">Planer Gabinetu · dane: ${S.patients.length} pacjentów, ${S.sessions.length} sesji · szyfrowanie AES-GCM 256 · v1.0</p>`;
+}
+
+/* =====================================================================
+   MODALE
+   ===================================================================== */
+function openModal(html){const m=$('#modal');m.innerHTML=`<div class="mbox"><button class="btn sm x" data-act="closeModal">✕</button>${html}</div>`;m.hidden=false;m.scrollTop=0;bindPads();decorateWriting()}
+function closeModal(){const m=$('#modal');m.hidden=true;m.innerHTML=''}
+
+function sessionModal(s,isNew){
+  PADSRC.sketch=s.sketch||'';
+  const act=S.patients.filter(p=>p.status!=='zakonczony'||p.id===s.patientId).sort((a,b)=>a.code.localeCompare(b.code,'pl',{numeric:true}));
+  openModal(`<h2>${isNew?'Nowa sesja':'Sesja'}</h2>
+  <form id="sForm">
+   <div class="row"><div><label>Pacjent (kod)</label><select name="patientId" required><option value="">— wybierz —</option>${act.map(p=>`<option value="${p.id}" ${p.id===s.patientId?'selected':''}>${esc(p.code)}</option>`).join('')}</select></div>
+    <div class="auto"><label>&nbsp;</label><button type="button" class="btn sm" data-act="quickPatient">+ nowy kod</button></div></div>
+   <div class="row"><div><label>Data</label><input type="date" name="date" value="${esc(s.date)}" required></div><div><label>Godzina</label><input type="time" name="time" value="${esc(s.time)}" required></div>
+    <div><label>Czas (min)</label><input type="number" name="dur" value="${esc(s.dur)}"></div></div>
+   <div class="row"><div><label>Rodzaj</label><select name="type">${TYPES.map(x=>`<option ${s.type===x?'selected':''}>${x}</option>`).join('')}</select></div>
+    <div><label>Miejsce</label><select name="mode">${MODES.map(x=>`<option ${s.mode===x?'selected':''}>${x}</option>`).join('')}</select></div>
+    <div><label>Status</label><select name="status">${STATUSES.map(([k,t])=>`<option value="${k}" ${s.status===k?'selected':''}>${t}</option>`).join('')}</select></div></div>
+   <div class="row"><div><label>Kwota (zł)</label><input type="number" name="fee" value="${esc(s.fee)}"></div>
+    <div class="auto"><label><input type="checkbox" name="paid" ${s.paid?'checked':''} style="width:22px;height:22px;vertical-align:middle;accent-color:var(--deep)"> opłacona</label></div>
+    ${isNew?`<div><label>Powtarzaj co tydzień</label><select name="repeat">${[1,2,4,6,8,10,12].map(n=>`<option value="${n}">${n===1?'nie':n+' razy'}</option>`).join('')}</select></div>`:''}</div>
+   <label>Opis świadczenia <span class="small muted">(do dokumentacji – pacjent ma do niego dostęp)</span></label>
+   <textarea class="lined" name="note" rows="4">${esc(s.note)}</textarea>
+   <label>Notatka robocza <span class="small muted">(krótkotrwała, prywatna – wyłączona z udostępniania)</span></label>
+   <textarea class="lined" name="work" rows="4">${esc(s.work)}</textarea>
+   <label>Zadanie / ustalenia na kolejną sesję</label><textarea class="lined" name="homework" rows="2">${esc(s.homework)}</textarea>
+   <label>Szkic / rysunek <span class="small muted">(schematy, genogram – zostaje jako obraz, nie zamienia się na tekst)</span></label><div data-pad="sketch"></div>
+   <div class="mfoot">${isNew?'':'<button type="button" class="btn danger sm" data-act="delSession">Usuń</button>'}<span class="sp"></span>
+    <button type="button" class="btn" data-act="closeModal">Anuluj</button><button class="btn or">Zapisz</button></div>
+  </form>`);
+  $('#sForm').onsubmit=e=>{e.preventDefault();const f=new FormData(e.target);
+    if(!f.get('patientId'))return toast('Wybierz kod pacjenta');
+    const o={patientId:f.get('patientId'),date:f.get('date'),time:f.get('time'),dur:Number(f.get('dur'))||S.settings.dur,type:f.get('type'),mode:f.get('mode'),
+      status:f.get('status'),fee:Number(f.get('fee'))||0,paid:!!f.get('paid'),note:f.get('note').trim(),work:f.get('work').trim(),homework:f.get('homework').trim()};
+    const pd=PADS.sketch;if(pd&&pd.dirty)o.sketch=pd.isEmpty()?'':pd.toData();
+    const changedCal=isNew||['date','time','dur','type','mode','status','patientId'].some(k=>String(o[k])!==String(s[k]));
+    if(isNew){const n=Number(f.get('repeat'))||1;const made=[];
+      for(let i=0;i<n;i++){const x=Object.assign({id:uid(),gcalId:null,sketch:''},o,{date:addDays(o.date,7*i)});if(i>0){x.note='';x.work='';x.homework='';x.sketch='';x.status='zaplanowana';x.paid=false}x.gcalDirty=!!S.settings.gcalClientId;S.sessions.push(x);made.push(x)}
+      save();closeModal();render();gcalAuto(made);toast(n>1?`Dodano ${n} sesji`:'Zapisano');
+    }else{Object.assign(s,o);if(changedCal&&S.settings.gcalClientId)s.gcalDirty=true;save();closeModal();render();if(s.gcalDirty)gcalAuto([s]);toast('Zapisano')}
+  };
+  CUR_SESSION=s;
+}
+let CUR_SESSION=null;
+function newSession(pid,time){
+  const p=pid?pat(pid):null;
+  sessionModal({patientId:pid||'',date:V.view==='patient'?today():V.date,time:time||'09:00',dur:S.settings.dur,type:'Sesja terapeutyczna',mode:p?.mode||MODES[0],status:'zaplanowana',fee:p?.fee||S.settings.fee,paid:false,note:'',work:'',homework:'',sketch:''},true);
+}
+function nextCode(){const pre=S.settings.codePrefix||'P';let n=S.patients.length+1;let c;do{c=`${pre}-${String(n).padStart(3,'0')}`;n++}while(S.patients.some(p=>p.code.toLowerCase()===c.toLowerCase()));return c}
+function patientModal(cb){
+  openModal(`<h2>Nowy pacjent</h2><form id="pForm">
+   <div class="note small">Nadaj kod, który tylko Ty potrafisz powiązać z osobą. Nie używaj inicjałów ani daty urodzenia. Dane tożsamości (wymagane w dokumentacji) wpiszesz później w zakładce <b>Sejf tożsamości</b>.</div>
+   <div class="row"><div><label>Kod</label><input type="text" name="code" value="${esc(nextCode())}" required></div>
+    <div><label>Grupa</label><select name="group">${GROUPS.map(g=>`<option ${g==='dorosły'?'selected':''}>${g}</option>`).join('')}</select></div>
+    <div><label>Forma</label><select name="mode">${MODES.map(g=>`<option>${g}</option>`).join('')}</select></div></div>
+   <label>Powód zgłoszenia (krótko)</label><textarea class="lined" name="reason" rows="2"></textarea>
+   <div class="mfoot"><button type="button" class="btn" data-act="closeModal">Anuluj</button><button class="btn or">Dodaj</button></div></form>`);
+  $('#pForm').onsubmit=e=>{e.preventDefault();const f=new FormData(e.target);const code=f.get('code').trim();
+    if(S.patients.some(p=>p.code.toLowerCase()===code.toLowerCase()))return toast('Taki kod już istnieje');
+    const p=newPatientObj(code,{group:f.get('group'),mode:f.get('mode'),reason:f.get('reason').trim()});
+    save();closeModal();cb?cb(p):(V.view='patient',V.pid=p.id,V.ptab='przeglad',render())};
+}
+function newPatientObj(code,extra={}){const used=S.patients.map(p=>p.color);const color=COLORS.find(c=>!used.includes(c))||COLORS[S.patients.length%COLORS.length];
+  const p=Object.assign({id:uid(),code,color,status:'aktywny',group:'dorosły',mode:MODES[0],start:today(),end:'',fee:(extra.group==='para'?S.settings.feePara:S.settings.fee)||S.settings.fee,tags:'',reason:'',goals:'',plan:'',important:'',interview:{},diag:[],opinions:[],created:new Date().toISOString()},extra);
+  S.patients.push(p);return p}
+
+/* ---------- opinie ---------- */
+let CUR_OP=null;
+function opinionModal(p,o){
+  CUR_OP={p,o};
+  openModal(`<h2>Opinia psychologiczna · ${esc(p.code)}</h2>
+   <div class="row"><div><label>Data opinii</label><input type="date" value="${esc(o.date)}" data-bind="op:date"></div></div>
+   ${OPF.map(([k,t])=>`<label>${t}</label><textarea class="lined" rows="${['purpose','recipient','basis','dates'].includes(k)?2:4}" data-bind="op:${k}">${esc(o[k])}</textarea>`).join('')}
+   <div class="card" style="margin-top:14px"><h3>Zebrane dane do opinii</h3>
+    <label style="font-size:15px;letter-spacing:0;text-transform:none;color:var(--ink)"><input type="checkbox" id="incInt" checked style="width:20px;height:20px;vertical-align:middle"> dołącz wywiad</label>
+    <label style="font-size:15px;letter-spacing:0;text-transform:none;color:var(--ink)"><input type="checkbox" id="incDiag" checked style="width:20px;height:20px;vertical-align:middle"> dołącz wyniki z zakładki Diagnoza</label>
+    <label style="font-size:15px;letter-spacing:0;text-transform:none;color:var(--ink)"><input type="checkbox" id="incSess" style="width:20px;height:20px;vertical-align:middle"> dołącz opisy sesji (bez notatek roboczych)</label>
+    <div class="row" style="margin-top:8px"><button class="btn bl auto" data-act="copyPrompt">Kopiuj tekst</button><span class="hint">Tekst zawiera tylko kod ${esc(p.code)} – bez danych z sejfu.</span></div></div>
+   <label>Tekst końcowy opinii (wklej poprawioną wersję)</label><textarea class="lined" rows="14" data-bind="op:final">${esc(o.final)}</textarea>
+   <div class="mfoot"><button class="btn danger sm" data-act="delOpinion">Usuń</button><span class="sp"></span><button class="btn" data-act="printOpinion">Drukuj / PDF</button><button class="btn or" data-act="closeModal">Gotowe</button></div>`);
+}
+function buildPrompt(p,o,inc){
+  const L=[];const add=(t,v)=>{if(v&&String(v).trim())L.push(`## ${t}\n${String(v).trim()}`)};
+  L.push(`MATERIAŁ DO OPINII PSYCHOLOGICZNEJ\nOsoba badana: kod ${p.code}. Dane osobowe: [IMIĘ I NAZWISKO], [DATA URODZENIA], [PESEL].`);
+  L.push(`Grupa: ${p.group}. Forma kontaktu: ${p.mode}.`);
+  OPF.forEach(([k,t])=>add(t,o[k]));
+  add('Powód zgłoszenia',p.reason);
+  if(inc.int)INTERVIEW.forEach(([k,t])=>add('Wywiad – '+t,p.interview?.[k]));
+  if(inc.diag)(p.diag||[]).forEach(d=>add(`Badanie ${d.date?fmtShort(d.date):''} – ${d.tool||''}`,[d.results&&'Wyniki: '+d.results,d.interp&&'Interpretacja: '+d.interp].filter(Boolean).join('\n')));
+  if(inc.sess){const ss=sessOf(p.id).filter(s=>s.status==='odbyta'&&s.note).reverse();if(ss.length)add(`Przebieg spotkań (${ss.length})`,ss.map(s=>`- ${fmtShort(s.date)} (${s.type}): ${s.note}`).join('\n'))}
+  return L.join('\n\n');
+}
+
+/* =====================================================================
+   SZKICOWNIK (rysik)
+   ===================================================================== */
+const PADS={},PADSRC={};
+class Pad{
+  constructor(host,name){this.name=name;this.color='#232323';this.size=2.4;this.erase=false;this.penOnly=false;this.dirty=false;this.empty=true;
+    host.innerHTML=`<div class="padwrap"><div class="padtools">
+      ${['#232323','#F07A2B','#7DB83A','#3a7fa0'].map((c,i)=>`<button type="button" class="pen ${i?'':'on'}" style="background:${c}" data-c="${c}"></button>`).join('')}
+      <select class="sz" style="width:auto;min-height:34px"><option value="1.6">cienko</option><option value="2.4" selected>średnio</option><option value="5">grubo</option></select>
+      <button type="button" class="btn sm er">gumka</button><button type="button" class="btn sm po">tylko rysik: nie</button><span style="flex:1"></span><button type="button" class="btn sm danger cl">wyczyść</button></div>
+      <canvas class="pad"></canvas></div>`;
+    this.cv=$('canvas',host);this.ctx=this.cv.getContext('2d');
+    $$('.pen',host).forEach(b=>b.onclick=()=>{$$('.pen',host).forEach(x=>x.classList.remove('on'));b.classList.add('on');this.color=b.dataset.c;this.erase=false;$('.er',host).classList.remove('or')});
+    $('.sz',host).onchange=e=>this.size=Number(e.target.value);
+    $('.er',host).onclick=e=>{this.erase=!this.erase;e.target.classList.toggle('or',this.erase)};
+    $('.po',host).onclick=e=>{this.penOnly=!this.penOnly;e.target.textContent='tylko rysik: '+(this.penOnly?'tak':'nie')};
+    $('.cl',host).onclick=()=>{if(confirm('Wyczyścić szkic?')){this.ctx.clearRect(0,0,this.cv.width,this.cv.height);this.dirty=true;this.empty=true}};
+    this.resize();
+    const src=PADSRC[name];if(src){const img=new Image();img.onload=()=>{this.ctx.drawImage(img,0,0,this.cv.width,img.height*this.cv.width/img.width);this.empty=false};img.src=src}
+    let drawing=false,last=null;
+    const pos=e=>{const r=this.cv.getBoundingClientRect();return{x:(e.clientX-r.left)*this.k,y:(e.clientY-r.top)*this.k,p:e.pressure||.5}};
+    this.cv.addEventListener('pointerdown',e=>{if(e.pointerType==='pen'&&!this.penOnly){this.penOnly=true;$('.po',host).textContent='tylko rysik: tak'}
+      if(this.penOnly&&e.pointerType==='touch')return;drawing=true;last=pos(e);this.cv.setPointerCapture(e.pointerId);e.preventDefault()});
+    this.cv.addEventListener('pointermove',e=>{if(!drawing)return;const evs=e.getCoalescedEvents?e.getCoalescedEvents():[e];
+      for(const ev of evs){const p=pos(ev);const c=this.ctx;c.globalCompositeOperation=this.erase?'destination-out':'source-over';
+        c.strokeStyle=this.color;c.lineCap='round';c.lineJoin='round';c.lineWidth=(this.erase?22:this.size*(0.55+p.p))*this.k;
+        c.beginPath();c.moveTo(last.x,last.y);c.lineTo(p.x,p.y);c.stroke();last=p}
+      this.dirty=true;this.empty=false;e.preventDefault()});
+    ['pointerup','pointercancel','pointerleave'].forEach(t=>this.cv.addEventListener(t,()=>drawing=false));
+  }
+  resize(){const r=this.cv.getBoundingClientRect();this.k=Math.min(2,window.devicePixelRatio||1);this.cv.width=Math.round((r.width||700)*this.k);this.cv.height=Math.round((r.height||340)*this.k)}
+  isEmpty(){return this.empty}
+  toData(){return this.cv.toDataURL('image/png')}
+}
+function bindPads(){$$('[data-pad]').forEach(h=>{if(h.dataset.bound)return;h.dataset.bound=1;PADS[h.dataset.pad]=new Pad(h,h.dataset.pad)})}
+
+/* =====================================================================
+   GOOGLE CALENDAR (tylko kody!)
+   ===================================================================== */
+const G={token:null,exp:0};
+function loadGis(){return new Promise((res,rej)=>{if(window.google?.accounts?.oauth2)return res();const s=document.createElement('script');s.src='https://accounts.google.com/gsi/client';s.onload=()=>res();s.onerror=()=>rej(new Error('Nie udało się wczytać logowania Google (brak internetu?)'));document.head.appendChild(s)})}
+async function gToken(){
+  if(G.token&&Date.now()<G.exp-60000)return G.token;
+  const cid=(S.settings.gcalClientId||'').trim();if(!cid)throw new Error('Wpisz OAuth Client ID w Ustawieniach');
+  await loadGis();
+  return new Promise((res,rej)=>{const c=google.accounts.oauth2.initTokenClient({client_id:cid,scope:'https://www.googleapis.com/auth/calendar.events',
+    callback:r=>{if(r.error)return rej(new Error(r.error_description||r.error));G.token=r.access_token;G.exp=Date.now()+(r.expires_in||3600)*1000;res(G.token)},
+    error_callback:e=>rej(new Error(e?.message||'Logowanie przerwane'))});c.requestAccessToken()});
+}
+async function gFetch(path,opt={}){const t=await gToken();
+  const r=await fetch('https://www.googleapis.com/calendar/v3'+path,Object.assign({},opt,{headers:{Authorization:'Bearer '+t,'Content-Type':'application/json'}}));
+  if(r.status===204||r.status===410)return null;const j=await r.json().catch(()=>null);if(!r.ok){if(r.status===401)G.token=null;throw new Error(j?.error?.message||('Błąd Google '+r.status))}return j}
+const calPath=()=>'/calendars/'+encodeURIComponent((S.settings.gcalCalendarId||'primary').trim())+'/events';
+function evBody(s){const p=pat(s.patientId);const e=addMin(s.date,s.time,s.dur);
+  return{summary:`${p?.code||'?'} · ${s.type}`,location:s.mode,start:{dateTime:`${s.date}T${s.time}:00`,timeZone:'Europe/Warsaw'},end:{dateTime:`${e.date}T${e.time}:00`,timeZone:'Europe/Warsaw'},
+    extendedProperties:{private:{planerId:s.id}},reminders:{useDefault:true}}}
+async function gcalPush(s){
+  if(isCancel(s)){if(s.gcalId){await gFetch(calPath()+'/'+encodeURIComponent(s.gcalId),{method:'DELETE'}).catch(()=>{});s.gcalId=null}}
+  else if(s.gcalId){try{await gFetch(calPath()+'/'+encodeURIComponent(s.gcalId),{method:'PATCH',body:JSON.stringify(evBody(s))})}
+    catch(e){const ev=await gFetch(calPath(),{method:'POST',body:JSON.stringify(evBody(s))});s.gcalId=ev.id}}
+  else{const ev=await gFetch(calPath(),{method:'POST',body:JSON.stringify(evBody(s))});s.gcalId=ev.id}
+  s.gcalDirty=false;
+}
+async function gcalAuto(list){if(!G.token||Date.now()>G.exp-60000){renderBanners();return}
+  try{for(const s of list)await gcalPush(s);save();renderBanners()}catch(e){toast('Kalendarz Google: '+e.message)}}
+async function gcalSyncAll(){const t=today();
+  S.sessions.filter(s=>s.date>=t&&!s.gcalId&&!isCancel(s)).forEach(s=>s.gcalDirty=true);
+  const list=S.sessions.filter(s=>s.gcalDirty);if(!list.length)return toast('Wszystko jest już w Kalendarzu');
+  try{let n=0;for(const s of list){await gcalPush(s);n++}save();render();toast(`Wysłano do Kalendarza: ${n}`)}catch(e){save();render();toast('Kalendarz Google: '+e.message,4000)}}
+async function gcalPull(){
+  try{const from=new Date(Date.now()-60*864e5).toISOString(),to=new Date(Date.now()+120*864e5).toISOString();
+    let items=[],pt='';do{const j=await gFetch(calPath()+`?singleEvents=true&orderBy=startTime&maxResults=2500&timeMin=${encodeURIComponent(from)}&timeMax=${encodeURIComponent(to)}${pt?'&pageToken='+pt:''}`);items=items.concat(j.items||[]);pt=j.nextPageToken}while(pt);
+    let added=0,moved=0,unknown=0;
+    for(const ev of items){if(!ev.start?.dateTime||ev.status==='cancelled')continue;
+      const dt=new Date(ev.start.dateTime),de=new Date(ev.end.dateTime);const date=ymd(dt),time=`${pad(dt.getHours())}:${pad(dt.getMinutes())}`,dur=Math.round((de-dt)/60000);
+      const own=ev.extendedProperties?.private?.planerId;const s=S.sessions.find(x=>x.id===own||x.gcalId===ev.id);
+      if(s){if(s.date!==date||s.time!==time||s.dur!==dur){s.date=date;s.time=time;s.dur=dur;moved++}s.gcalId=ev.id;continue}
+      const sum=(ev.summary||'').trim().toLowerCase();
+      const p=S.patients.filter(p=>p.code&&sum.startsWith(p.code.toLowerCase())&&!/[0-9a-ząćęłńóśźż]/i.test(sum.charAt(p.code.length))).sort((a,b)=>b.code.length-a.code.length)[0];
+      if(!p){unknown++;continue}
+      S.sessions.push({id:uid(),patientId:p.id,date,time,dur,type:TYPES.find(t=>(ev.summary||'').toLowerCase().includes(t.toLowerCase()))||'Sesja terapeutyczna',mode:p.mode,
+        status:'zaplanowana',fee:p.fee||S.settings.fee,paid:false,note:'',work:'',homework:'',sketch:'',gcalId:ev.id,gcalDirty:false});added++}
+    save();render();toast(`Z Kalendarza: nowe ${added}, przesunięte ${moved}, pominięte (bez kodu) ${unknown}`,5000);
+  }catch(e){toast('Kalendarz Google: '+e.message,4000)}}
+
+/* =====================================================================
+   KOPIE / HASŁO
+   ===================================================================== */
+async function backupNow(){const blob=await encryptObj(K,SALT,S);
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(blob)],{type:'application/json'}));
+  a.download=`planer-gabinetu-kopia-${today()}.json`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),5000);
+  S.settings.lastBackup=new Date().toISOString();save();render();toast('Kopia pobrana (zaszyfrowana)')}
+function restore(){const inp=document.createElement('input');inp.type='file';inp.accept='.json,application/json';
+  inp.onchange=async()=>{const f=inp.files[0];if(!f)return;let blob;try{blob=JSON.parse(await f.text());if(blob.app!=='planer-gabinetu')throw 0}catch(_){return toast('To nie jest kopia Planera Gabinetu')}
+    const pw=prompt('Hasło, którym zaszyfrowano kopię:');if(!pw)return;
+    try{const salt=unb64(blob.salt),key=await deriveKey(pw,salt);const data=await decryptObj(key,blob);
+      if(S&&!confirm('Przywrócenie ZASTĄPI obecne dane na tym urządzeniu. Kontynuować?'))return;
+      SALT=salt;K=key;S=Object.assign(DEF(),data);S.settings=Object.assign(DEF().settings,data.settings);
+      await idb.set('vault',blob);toast('Przywrócono kopię');openApp()}
+    catch(_){toast('Nieprawidłowe hasło do kopii')}};inp.click()}
+function changePw(){openModal(`<h2>Zmiana hasła</h2><form id="cpF"><label>Obecne hasło</label><input type="password" name="a" required><label>Nowe hasło (min. 10 znaków)</label><input type="password" name="b" required minlength="10"><label>Powtórz nowe</label><input type="password" name="c" required>
+  <div class="note small">Starsze kopie zapasowe nadal otwierasz STARYM hasłem. Po zmianie zrób nową kopię.</div><div class="mfoot"><button class="btn or">Zmień</button></div></form>`);
+  $('#cpF').onsubmit=async e=>{e.preventDefault();const f=new FormData(e.target);
+    try{const blob=await idb.get('vault');await decryptObj(await deriveKey(f.get('a'),SALT),blob)}catch(_){return toast('Obecne hasło jest nieprawidłowe')}
+    if(f.get('b').length<10||f.get('b')!==f.get('c'))return toast('Nowe hasła są za krótkie lub się różnią');
+    SALT=crypto.getRandomValues(new Uint8Array(16));K=await deriveKey(f.get('b'),SALT);await idb.set('vault',await encryptObj(K,SALT,S));closeModal();toast('Hasło zmienione – zrób nową kopię')}}
+
+/* =====================================================================
+   WYDRUKI
+   ===================================================================== */
+function letterhead(){const s=S.settings;return `<div class="lh"><b>${esc(s.podmiot)}</b> · ${esc(s.adres)}<br>${esc(s.psychName)}, psycholog${s.nrWpisu?' · nr wpisu do Rejestru: '+esc(s.nrWpisu):''}</div>`}
+function doPrint(html){$('#print').innerHTML=html;setTimeout(()=>window.print(),80)}
+function identityBlock(p){const id=S.identity[p.id]||{};const open=Date.now()<vaultOpenUntil;
+  if(!open)return `<p><i>Dane tożsamości ukryte – otwórz Sejf tożsamości przed drukiem.</i> Kod: ${esc(p.code)}</p>`;
+  return `<table><tr><th>Imię i nazwisko</th><td>${esc([id.first,id.last].filter(Boolean).join(' '))}</td><th>Data urodzenia</th><td>${esc(fmtShort(id.birth))}</td></tr>
+   <tr><th>PESEL / dokument</th><td>${esc(id.pesel||id.doc)}</td><th>Adres</th><td>${esc(id.address)}</td></tr>
+   ${id.guardian?`<tr><th>Przedstawiciel ustawowy</th><td colspan="3">${esc(id.guardian)}</td></tr>`:''}</table>`}
+function printDoc(p){
+  if(Date.now()>vaultOpenUntil&&!confirm('Sejf tożsamości jest zamknięty – wydruk nie będzie zawierał danych osobowych wymaganych w dokumentacji. Drukować mimo to?'))return;
+  const ss=sessOf(p.id).filter(s=>s.status==='odbyta').reverse();
+  doPrint(`${letterhead()}<h1>Dokumentacja psychologiczna</h1>${identityBlock(p)}
+   <h2>Świadczenia</h2><table><tr><th style="width:90px">Data</th><th style="width:150px">Rodzaj</th><th>Opis udzielonego świadczenia</th></tr>
+   ${ss.map(s=>`<tr><td>${esc(fmtShort(s.date))}</td><td>${esc(s.type)}<br>${esc(s.mode)}</td><td class="pre">${esc(s.note||'—')}</td></tr>`).join('')}</table>
+   ${(p.dx||[]).filter(d=>d.status!=='wykluczone'&&d.status!=='hipoteza').length?`<h2>Rozpoznania</h2><table><tr><th>Klasyfikacja</th><th>Kod</th><th>Nazwa</th><th>Status</th></tr>${p.dx.filter(d=>d.status!=='wykluczone'&&d.status!=='hipoteza').map(d=>`<tr><td>${esc(d.sys)}</td><td>${esc(d.code)}</td><td>${esc(d.name)}</td><td>${esc(d.status)}</td></tr>`).join('')}</table>`:''}
+   ${(p.diag||[]).length?`<h2>Badania diagnostyczne</h2><table><tr><th>Data</th><th>Metoda</th><th>Interpretacja</th></tr>${p.diag.map(d=>`<tr><td>${esc(fmtShort(d.date))}</td><td>${esc(d.tool)}</td><td class="pre">${esc(d.interp)}</td></tr>`).join('')}</table>`:''}
+   <p>Data sporządzenia: ${esc(fmtShort(today()))}</p><div class="sign">.......................................................<br>${esc(S.settings.psychName)}, psycholog</div>`)}
+function printOpinion(p,o){
+  if(Date.now()>vaultOpenUntil&&!confirm('Sejf tożsamości jest zamknięty – w opinii zostanie tylko kod. Drukować?'))return;
+  let txt=o.final||OPF.map(([k,t])=>o[k]?`${t}:\n${o[k]}`:'').filter(Boolean).join('\n\n');
+  if(Date.now()<vaultOpenUntil){const id=S.identity[p.id]||{};txt=txt.replace(/\[IMIĘ I NAZWISKO\]/g,[id.first,id.last].filter(Boolean).join(' ')||'[IMIĘ I NAZWISKO]').replace(/\[DATA URODZENIA\]/g,fmtShort(id.birth)||'[DATA URODZENIA]').replace(/\[PESEL\]/g,id.pesel||'[PESEL]')}
+  doPrint(`${letterhead()}<p style="text-align:right">${esc(S.settings.adres.split(',').pop().trim())}, ${esc(fmtShort(o.date))}</p><h1>Opinia psychologiczna</h1>${o.final?'':identityBlock(p)}<div class="pre">${esc(txt)}</div>
+   <div class="sign">.......................................................<br>${esc(S.settings.psychName)}, psycholog${S.settings.nrWpisu?'<br>nr wpisu: '+esc(S.settings.nrWpisu):''}</div>`)}
+
+/* =====================================================================
+   ZDARZENIA
+   ===================================================================== */
+const A={
+  go:e=>{V.view=e.dataset.v;if(V.view!=='patient')V.pid=null;render();scrollTo(0,0)},
+  shift:e=>{V.date=addDays(V.date,Number(e.dataset.n));render()},
+  shiftMonth:e=>{const d=parseYmd(V.date);V.date=ymd(new Date(d.getFullYear(),d.getMonth()+Number(e.dataset.n),1));render()},
+  toToday:()=>{V.date=today();render()},
+  openDay:e=>{V.date=e.dataset.d;V.view='day';render()},
+  newAt:e=>newSession(null,e.dataset.time),
+  newSession:e=>newSession(e.dataset.pid||(V.view==='patient'?V.pid:null)),
+  openSession:e=>{const s=S.sessions.find(x=>x.id===e.dataset.id);if(s)sessionModal(s,false)},
+  delSession:async()=>{const s=CUR_SESSION;if(!confirm('Usunąć tę sesję?'))return;
+    if(s.gcalId&&G.token){try{await gFetch(calPath()+'/'+encodeURIComponent(s.gcalId),{method:'DELETE'})}catch(_){}}
+    else if(s.gcalId)toast('Usuń też wydarzenie w Kalendarzu Google (brak połączenia)',4000);
+    S.sessions=S.sessions.filter(x=>x!==s);save();closeModal();render()},
+  quickStatus:e=>{const s=S.sessions.find(x=>x.id===e.dataset.id);s.status=e.dataset.s;save();render()},
+  quickPatient:()=>{const keep=CUR_SESSION,isNew=!keep.id;const draft=[...new FormData($('#sForm')).entries()];
+    patientModal(p=>{sessionModal(keep,isNew);const f=$('#sForm');
+      draft.forEach(([k,v])=>{const el=f.elements[k];if(!el)return;if(el.type==='checkbox')el.checked=true;else el.value=v});
+      if(!draft.some(([k])=>k==='paid'))f.elements.paid.checked=false;f.elements.patientId.value=p.id;const np=pat(p.id);if(isNew)f.elements.mode.value=np.mode})},
+  prioToggle:e=>{const D=day(V.date);D.prio[e.dataset.i].done=e.checked;save();render()},
+  prioDel:e=>{day(V.date).prio.splice(e.dataset.i,1);save();render()},
+  energy:e=>{const D=day(V.date);D.energy=D.energy===Number(e.dataset.n)?0:Number(e.dataset.n);save();render()},
+  newPatient:()=>patientModal(),
+  openPatient:e=>{V.pid=e.dataset.id;V.view='patient';V.ptab='przeglad';render();scrollTo(0,0)},
+  ptab:e=>{V.ptab=e.dataset.t;render()},
+  pColor:e=>{pat(V.pid).color=e.dataset.c;save();render()},
+  delPatient:()=>{const p=pat(V.pid);const n=sessOf(p.id).length;
+    if(prompt(`Usunąć pacjenta ${p.code} wraz z ${n} sesjami, opiniami i danymi z sejfu? Tego nie da się cofnąć. Wpisz kod pacjenta, aby potwierdzić:`)!==p.code)return;
+    S.sessions=S.sessions.filter(s=>s.patientId!==p.id);delete S.identity[p.id];Object.keys(S.nameMap).forEach(k=>{if(S.nameMap[k]===p.id)delete S.nameMap[k]});
+    S.patients=S.patients.filter(x=>x!==p);V.view='patients';save();render();toast('Usunięto')},
+  addDiag:()=>{const p=pat(V.pid);(p.diag=p.diag||[]).unshift({date:today(),tool:'',results:'',interp:''});save();render()},
+  delDiag:e=>{if(!confirm('Usunąć wpis?'))return;pat(V.pid).diag.splice(e.dataset.i,1);save();render()},
+  newOpinion:()=>{const p=pat(V.pid);const o={id:uid(),date:today(),final:''};OPF.forEach(([k])=>o[k]='');
+    o.methods=(p.diag||[]).map(d=>d.tool).filter(Boolean).join(', ');(p.opinions=p.opinions||[]).unshift(o);save();opinionModal(p,o)},
+  openOpinion:e=>{const p=pat(e.dataset.pid||V.pid);const o=(p.opinions||[]).find(x=>x.id===e.dataset.id);if(o)opinionModal(p,o)},
+  delOpinion:()=>{const{p,o}=CUR_OP;if(!confirm('Usunąć opinię?'))return;p.opinions=p.opinions.filter(x=>x!==o);save();closeModal();render()},
+  copyPrompt:async()=>{const{p,o}=CUR_OP;const txt=buildPrompt(p,o,{int:$('#incInt').checked,diag:$('#incDiag').checked,sess:$('#incSess').checked});
+    try{await navigator.clipboard.writeText(txt);toast('Skopiowano do schowka')}
+    catch(_){openModal(`<h2>Skopiuj tekst</h2><textarea rows="18" readonly>${esc(txt)}</textarea><div class="mfoot"><button class="btn" data-act="closeModal">Zamknij</button></div>`)}},
+  printOpinion:()=>printOpinion(CUR_OP.p,CUR_OP.o),
+  printDoc:()=>printDoc(pat(V.pid)),
+  ikCopy:async()=>{const txt=ikPrompt(pat(V.pid));try{await navigator.clipboard.writeText(txt);toast('Skopiowano do schowka')}
+    catch(_){openModal(`<h2>Skopiuj tekst</h2><textarea rows="18" readonly>${esc(txt)}</textarea><div class="mfoot"><button class="btn" data-act="closeModal">Zamknij</button></div>`)}},
+  ikPrintMe:()=>ikPrintMe(pat(V.pid)),
+  openIntake:e=>{V.pid=e.dataset.id;V.view='patient';V.ptab='pierwsza';render();scrollTo(0,0)},
+  newIntake:()=>patientModal(p=>{V.pid=p.id;V.view='patient';V.ptab='pierwsza';render()}),
+  ikPrintPt:()=>ikPrintPt(pat(V.pid)),
+  addDx:e=>{const p=pat(V.pid);p.dx=p.dx||[];if(p.dx.some(d=>d.sys===e.dataset.sys&&d.code===e.dataset.code))return toast('Już dodane');
+    p.dx.push({id:uid(),sys:e.dataset.sys,code:e.dataset.code,name:dxName(e.dataset.sys,e.dataset.code),status:'hipoteza',date:today()});save();render()},
+  delDx:e=>{const p=pat(V.pid);p.dx.splice(Number(e.dataset.i),1);save();render()},
+  vaultClose:()=>{vaultOpenUntil=0;render()},
+  closeModal:()=>{closeModal();render()},
+  lockNow:()=>DEMO?location.reload():lockApp(),
+  setTheme:e=>{S.settings.theme=e.dataset.t;save();render()},
+  backupNow:()=>backupNow(),
+  restore:()=>restore(),
+  restoreFromLock:()=>restore(),
+  changePw:()=>changePw(),
+  gcalConnect:async()=>{try{await gToken();toast('Połączono z Kalendarzem Google');render()}catch(e){toast(e.message,4000)}},
+  gcalSyncAll:()=>gcalSyncAll(),
+  gcalPull:()=>gcalPull(),
+  wipe:async()=>{if(prompt('Usunąć WSZYSTKIE dane z tego urządzenia? Wpisz USUŃ, aby potwierdzić.')!=='USUŃ')return;await idb.del('vault');K=null;S=null;showLock()}
+};
+document.addEventListener('click',e=>{const el=e.target.closest('[data-act]');if(!el)return;
+  if(el.tagName==='INPUT'&&el.type==='checkbox'){A[el.dataset.act]?.(el);return}
+  if(el.closest('#lock')&&!['restoreFromLock'].includes(el.dataset.act))return;
+  e.preventDefault();A[el.dataset.act]?.(el)});
+document.addEventListener('submit',e=>{const f=e.target.closest('[data-form]');if(!f)return;e.preventDefault();const fd=new FormData(f);
+  if(f.dataset.form==='prioAdd'){const t=fd.get('t').trim();if(t){day(V.date).prio.push({t,done:false});save();render();setTimeout(()=>$('[data-form=prioAdd] input')?.focus(),20)}}
+  if(f.dataset.form==='vaultOpen'){(async()=>{try{const blob=await idb.get('vault');await decryptObj(await deriveKey(fd.get('pw'),SALT),blob);vaultOpenUntil=Date.now()+5*60000;render()}catch(_){toast('Nieprawidłowe hasło')}})()}});
+document.addEventListener('input',e=>{const el=e.target;
+  if(el.dataset.actInput==='search'){V.q=el.value;const pos=el.selectionStart;render();const n=$('[data-act-input=search]');n.focus();n.setSelectionRange(pos,pos);return}
+  if(el.dataset.actInput==='icdq'){V.icdq=el.value;const pos=el.selectionStart;render();const n=$('[data-act-input=icdq]');n.focus();n.setSelectionRange(pos,pos);return}
+  const b=el.dataset.bind;if(!b||!S)return;
+  const val=el.type==='checkbox'?el.checked:el.type==='number'?(el.value===''?'':Number(el.value)):el.value;
+  const [kind,a,c]=b.split(':');
+  if(kind==='day')day(V.date)[a]=val;
+  else if(kind==='week')S.weeks[weekStart(V.date)][a]=val;
+  else if(kind==='month')S.months[el.dataset.ym][a]=val;
+  else if(kind==='p'){const p=pat(V.pid);if(a==='code'){const v=String(val).trim();if(!v||S.patients.some(x=>x!==p&&x.code.toLowerCase()===v.toLowerCase())){el.style.borderColor='#b33';return}el.style.borderColor='';p.code=v}else p[a]=val}
+  else if(kind==='pi'){const p=pat(V.pid);(p.interview=p.interview||{})[a]=val}
+  else if(kind==='pd'){pat(V.pid).diag[a][c]=val}
+  else if(kind==='op'){CUR_OP.o[a]=val}
+  else if(kind==='ik'){const I=pat(V.pid).intake;if(val===''||val===false)delete I.a[a];else I.a[a]=val;clearTimeout(ikT);ikT=setTimeout(refreshIk,120)}
+  else if(kind==='ikt'){pat(V.pid).intake[a]=val;if(a==='tpl'){save();render();return}}
+  else if(kind==='ikoff'){pat(V.pid).intake.off[a]=!el.checked}
+  else if(kind==='ikx'){pat(V.pid).intake.extra=val}
+  else if(kind==='dx'){pat(V.pid).dx[a][c]=val}
+  else if(kind==='id'){if(Date.now()>vaultOpenUntil)return;(S.identity[V.pid]=S.identity[V.pid]||{})[a]=val;vaultOpenUntil=Math.max(vaultOpenUntil,Date.now()+2*60000)}
+  else if(kind==='s'){S.settings[a]=val}
+  save()});
+document.addEventListener('change',e=>{const el=e.target;
+  if(el.dataset.actChange==='pfilter'){V.pfilter=el.value;render();return}
+  const b=el.dataset.bind;if(!b||!S)return;
+  if(el.tagName==='SELECT'||el.type==='date')el.dispatchEvent(new Event('input',{bubbles:true}));
+  if(b==='p:status'||b==='p:end'){const p=pat(V.pid);if(p&&p.status==='zakonczony'&&!p.end){p.end=today();save()}render()}
+  else if(b==='p:code'||b.startsWith('s:day'))render()});
+addEventListener('afterprint',()=>{$('#print').innerHTML=''});
+
+/* =====================================================================
+   PIERWSZA WIZYTA (wywiad kliniczny) i ROZPOZNANIA ICD
+   ===================================================================== */
+let ikT=null;
+const dxName=(sys,c)=>sys==='ICD-10'?KLIN.name10(c):sys==='ICD-11'?KLIN.name11(c):KLIN.nameDsm(c);
+const hsh=s=>{let h=0;for(const ch of s)h=(h*31+ch.charCodeAt(0))|0;return 'k'+(h>>>0).toString(36)};
+function ensureIntake(p){if(!p.intake)p.intake={tpl:['dziecko','nastolatek'].includes(p.group)?'dziecko':'dorosly',date:today(),a:{},off:{},extra:''};
+  const I=p.intake;I.a=I.a||{};I.off=I.off||{};return I}
+function fieldHtml([id,label,type,opts],a){
+  if(type==='text')return `<label>${esc(label)}</label><textarea class="lined" rows="2" data-bind="ik:${id}">${esc(a[id])}</textarea>`;
+  if(type==='num')return `<label>${esc(label)}</label><input type="number" value="${esc(a[id])}" data-bind="ik:${id}" style="max-width:140px">`;
+  if(type==='sel')return `<label>${esc(label)}</label><select data-bind="ik:${id}"><option value="">—</option>${opts.map(o=>`<option ${a[id]===o?'selected':''}>${esc(o)}</option>`).join('')}</select>`;
+  if(type==='phq'||type==='gad'){const sc=type==='phq'?KLIN.PHQ9:KLIN.GAD7;
+    return `<p class="small">${esc(sc.intro)} <span class="muted">(0 – ${esc(sc.opts[0])}, 1 – ${esc(sc.opts[1])}, 2 – ${esc(sc.opts[2])}, 3 – ${esc(sc.opts[3])})</span></p><table class="scale">${sc.items.map((it,i)=>`<tr><td>${i+1}. ${esc(it)}</td><td><select data-bind="ik:${type}_${i}"><option value="">–</option>${[0,1,2,3].map(v=>`<option value="${v}" ${String(a[type+'_'+i])===String(v)?'selected':''}>${v}</option>`).join('')}</select></td></tr>`).join('')}</table><p class="small muted" style="font-size:12px">${esc(sc.src||'')}</p>`}
+  return ''}
+function vIntake(p){const I=ensureIntake(p);const T=KLIN.TEMPLATES[I.tpl];
+  const secs=T.sections.map(sec=>{const chk=sec.f.filter(f=>f[2]==='chk'),oth=sec.f.filter(f=>f[2]!=='chk');
+    return `<div class="ksec"><h3>${esc(sec.t)}</h3>${chk.length?`<div class="chks">${chk.map(([id,l])=>`<label><input type="checkbox" data-bind="ik:${id}" ${I.a[id]?'checked':''}><span>${esc(l)}</span></label>`).join('')}</div>`:''}${oth.map(f=>fieldHtml(f,I.a)).join('')}</div>`}).join('');
+  return `<div class="row" style="margin-bottom:10px"><div><label>Szablon wywiadu</label><select data-bind="ikt:tpl">${Object.entries(KLIN.TEMPLATES).map(([k,t])=>`<option value="${k}" ${I.tpl===k?'selected':''}>${esc(t.name)}</option>`).join('')}</select></div>
+    <div><label>Data wywiadu</label><input type="date" value="${esc(I.date)}" data-bind="ikt:date"></div></div>
+   <div class="ikgrid"><div>${secs}</div><div class="ikres" id="ikRes">${ikResults(p)}</div></div>`}
+function ikResults(p){const I=ensureIntake(p);const R=KLIN.analyze(I);const s=R.s;
+  const sc=[];if(s.phqDone)sc.push(`<div class="stat"><b>${s.phq}</b>PHQ-9 · ${esc(KLIN.band(KLIN.PHQ9,s.phq))}</div>`);if(s.gadDone)sc.push(`<div class="stat"><b>${s.gad}</b>GAD-7 · ${esc(KLIN.band(KLIN.GAD7,s.gad))}</div>`);
+  const nm10=c=>KLIN.name10(c),nm11=c=>KLIN.name11(c);
+  return `<div class="card"><h2>Podsumowanie wywiadu</h2><p class="small muted">Tylko dla Ciebie. Wyniki skal i sygnały liczone na bieżąco z wywiadu – to informacje pomocnicze, nie rozpoznanie.</p>
+   ${sc.length?`<div class="stats">${sc.join('')}</div>`:''}
+   ${R.risk.alerts.map(t=>`<div class="alert">${esc(noCodes(t))}</div>`).join('')}
+   ${R.findings.filter(f=>f.id!=='none').length?`<div class="find"><h3>Obszary zgłaszanych trudności</h3><ul>${R.findings.filter(f=>f.id!=='none').map(f=>`<li>${esc(f.area)}</li>`).join('')}</ul><div class="small muted">Rozpoznanie i plan pracy ustalasz samodzielnie – kody znajdziesz w zakładce ICD / DSM.</div></div>`:''}
+   <div class="row" style="margin-top:8px"><button class="btn sm bl auto" data-act="ikCopy">Kopiuj tekst</button><button class="btn sm auto" data-act="ikPrintMe">Drukuj podsumowanie</button></div></div>
+   <div class="sticky" style="--c:var(--soft2)"><h3>Zalecenia dla pacjenta</h3><p class="small">Lista do zrobienia na wydruk – bez rozpoznań. Odznacz to, czego nie chcesz dać.</p>
+    ${R.tasks.map(t=>{const k=hsh(t);return `<label class="todo" style="font-size:14.5px;letter-spacing:0;text-transform:none;color:var(--ink);font-weight:400;margin:0"><input type="checkbox" data-bind="ikoff:${k}" ${I.off[k]?'':'checked'}><span>${esc(t)}</span></label>`}).join('')}
+    <label style="font-size:18px">Własne zalecenia (każde w nowej linii)</label><textarea class="lined" rows="3" data-bind="ikx:extra">${esc(I.extra)}</textarea>
+    <div class="row" style="margin-top:8px"><button class="btn or auto" data-act="ikPrintPt">Drukuj zalecenia dla pacjenta</button></div></div>`}
+function refreshIk(){save();const r=$('#ikRes');const p=pat(V.pid);if(!r||!p)return;const st=r.scrollTop;r.innerHTML=ikResults(p);r.scrollTop=st;decorateWriting()}
+function ikAnswers(p){const I=p.intake,T=KLIN.TEMPLATES[I.tpl],L=[];
+  T.sections.forEach(sec=>{const rows=[];sec.f.forEach(([id,l,type])=>{
+    if(type==='phq'||type==='gad'){const sc=type==='phq'?KLIN.PHQ9:KLIN.GAD7;const v=sc.items.map((_,i)=>I.a[type+'_'+i]);if(v.some(x=>x!==undefined&&x!==''))rows.push(`${sc.name}: pozycje ${v.map(x=>x??'–').join(', ')}`);return}
+    const v=I.a[id];if(v===undefined||v===''||v===false)return;rows.push(type==='chk'?`✓ ${l}`:`${l}: ${v}`)});
+    if(rows.length)L.push({t:sec.t,rows})});return L}
+function noCodes(t){return String(t).replace(/\s*\((?:[A-Z]\d|\d[A-Z])[^)]*\)/g,'')}
+function ikPrompt(p){const I=ensureIntake(p),R=KLIN.analyze(I);const L=[];
+  L.push(`WYWIAD – PIERWSZA WIZYTA\nPacjent: kod ${p.code}, grupa: ${p.group}\nSzablon: ${KLIN.TEMPLATES[I.tpl].name}, data: ${fmtShort(I.date)}`);
+  ikAnswers(p).forEach(s=>L.push(`## ${s.t}\n${s.rows.join('\n')}`));
+  const sc=[];if(R.s.phqDone)sc.push(`PHQ-9 = ${R.s.phq} (${KLIN.band(KLIN.PHQ9,R.s.phq)}), pozycja 9 = ${R.s.phq9}`);
+  if(R.s.gadDone)sc.push(`GAD-7 = ${R.s.gad} (${KLIN.band(KLIN.GAD7,R.s.gad)})`);if(sc.length)L.push('## Skale przesiewowe\n'+sc.join('\n'));
+  if(R.risk.alerts.length)L.push('## Sygnały ostrzegawcze\n'+R.risk.alerts.map(noCodes).join('\n'));
+  const ar=R.findings.filter(f=>f.id!=='none').map(f=>'- '+f.area);if(ar.length)L.push('## Obszary zgłaszanych trudności\n'+ar.join('\n'));
+  return L.join('\n\n')}
+function ikPrintPt(p){const I=ensureIntake(p),R=KLIN.analyze(I);const items=[...R.tasks.filter(t=>!I.off[hsh(t)]),...(I.extra||'').split('\n').map(x=>x.trim()).filter(Boolean)];
+  const st=S.settings;
+  doPrint(`${letterhead()}<h1>${I.tpl==='dziecko'?'Zalecenia po pierwszym spotkaniu':'Moje zalecenia po pierwszym spotkaniu'}</h1>
+   <p>Data: ${esc(fmtShort(I.date))}</p>
+   <table>${items.map(t=>`<tr><td style="width:28px;font-size:16pt">☐</td><td>${esc(t)}</td></tr>`).join('')}</table>
+   <h2>Gdy jest trudno – gdzie szukać pomocy od razu</h2>
+   <table>${KLIN.CRISIS.map(([n,d])=>`<tr><td style="width:120px"><b>${esc(n)}</b></td><td>${esc(d)}</td></tr>`).join('')}</table>
+   <div class="sign">${esc(st.psychName)}, psycholog${st.kontakt?'<br>'+esc(st.kontakt):''}</div>`)}
+function ikPrintMe(p){const I=ensureIntake(p),R=KLIN.analyze(I);
+  doPrint(`${letterhead()}<h1>Podsumowanie pierwszej wizyty – ${esc(p.code)}</h1><p>Data wywiadu: ${esc(fmtShort(I.date))} · ${esc(KLIN.TEMPLATES[I.tpl].name)}</p>
+   ${R.s.phqDone||R.s.gadDone?`<p>${R.s.phqDone?`PHQ-9: <b>${R.s.phq}</b> (${esc(KLIN.band(KLIN.PHQ9,R.s.phq))}) `:''}${R.s.gadDone?` · GAD-7: <b>${R.s.gad}</b> (${esc(KLIN.band(KLIN.GAD7,R.s.gad))})`:''}</p>`:''}
+   ${R.risk.alerts.length?`<h2>Sygnały ostrzegawcze</h2><ul>${R.risk.alerts.map(a=>`<li>${esc(noCodes(a))}</li>`).join('')}</ul>`:''}
+   ${R.findings.filter(f=>f.id!=='none').length?`<h2>Obszary zgłaszanych trudności</h2><ul>${R.findings.filter(f=>f.id!=='none').map(f=>`<li>${esc(f.area)}</li>`).join('')}</ul>`:''}
+   <h2>Wywiad</h2>${ikAnswers(p).map(s=>`<p><b>${esc(s.t)}</b><br>${s.rows.map(esc).join('<br>')}</p>`).join('')}
+   <p style="font-size:9pt">Wyniki skal przesiewowych nie stanowią rozpoznania – interpretację i wnioski formułuje psycholog.</p>`)}
+function vIcd(p){p.dx=p.dx||[];const q=(V.icdq||'').trim().toLowerCase();
+  const norm=s=>s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ł/g,'l');
+  const nq=norm(q);
+  const hits=q.length<2?[]:[...KLIN.ICD10.map(x=>['ICD-10',...x]),...KLIN.ICD11.map(x=>['ICD-11',...x]),...KLIN.DSM5.map(x=>['DSM-5-TR',...x])].filter(([,c,n])=>norm(c).includes(nq)||norm(n).includes(nq)||(KLIN.ALIAS[c]||'').includes(nq)).slice(0,40);
+  return `<div class="card"><h3>Rozpoznania i hipotezy</h3>
+   ${p.dx.length?p.dx.map((d,i)=>`<div class="dxi"><span class="badge">${esc(d.sys)}</span><span class="c">${esc(d.code)}</span><span style="flex:1">${esc(d.name)}</span>
+     <select data-bind="dx:${i}:status" style="width:auto">${['hipoteza','rozpoznanie robocze','rozpoznanie potwierdzone','wykluczone'].map(o=>`<option ${d.status===o?'selected':''}>${o}</option>`).join('')}</select>
+     <span class="small muted">${esc(fmtShort(d.date))}</span><button class="linkbtn" data-act="delDx" data-i="${i}">usuń</button></div>`).join(''):'<p class="muted">Brak. Dodaj z wyszukiwarki poniżej lub z zakładki Pierwsza wizyta.</p>'}</div>
+   <div class="card"><h3>Wyszukaj kod ICD-10 / ICD-11 / DSM-5-TR</h3><input type="text" placeholder="np. F41, 6B00, depres, lęk, ADHD…" value="${esc(V.icdq||'')}" data-act-input="icdq">
+    <div class="list" style="margin-top:8px">${hits.map(([sys,c,n])=>`<div class="item" data-act="addDx" data-sys="${sys}" data-code="${esc(c)}"><span class="badge">${sys}</span><b style="min-width:64px">${esc(c)}</b><span class="grow">${esc(n)}</span><span class="small">+ dodaj</span></div>`).join('')||(q.length>=2?'<p class="muted">Brak wyników.</p>':'')}</div>
+    <p class="hint">ICD-10: rozdział V (F00–F99) i wybrane kody Z. ICD-11: rozdział 06 oraz 7A00/7A01, 8A05, QD85, QE84. DSM-5-TR: nazwy rozpoznań z kodami ICD-10-CM (bez kryteriów – sięgnij do podręcznika). W Polsce w dokumentacji obowiązuje ICD-10; nazwy ICD-11 robocze – oficjalne tłumaczenie publikuje Centrum e-Zdrowia.</p></div>`}
+
+/* ---------- tryb pisania rysikiem ---------- */
+function decorateWriting(){$$('textarea.lined').forEach(t=>{if(t.dataset.w)return;t.dataset.w=1;
+  const w=document.createElement('div');w.className='wwrap';t.parentNode.insertBefore(w,t);w.appendChild(t);
+  const b=document.createElement('button');b.type='button';b.className='wbtn';b.textContent='✎ Pisz';b.onclick=e=>{e.preventDefault();e.stopPropagation();openWriter(t)};w.appendChild(b)})}
+function openWriter(src){closeWriter();const lab=src.closest('.wwrap')?.previousElementSibling;const title=lab&&lab.tagName==='LABEL'?lab.textContent:'Notatka';
+  const d=document.createElement('div');d.id='writer';
+  d.innerHTML=`<div class="whead"><h3></h3><button type="button" class="btn sm" data-w="cancel">Anuluj</button><button type="button" class="btn sm or" data-w="ok">Gotowe</button></div><textarea spellcheck="true" lang="pl" autocapitalize="sentences"></textarea>`;
+  $('h3',d).textContent=title;const ta=$('textarea',d);ta.value=src.value;document.body.appendChild(d);
+  setTimeout(()=>{ta.focus();ta.setSelectionRange(ta.value.length,ta.value.length)},60);
+  d.addEventListener('click',e=>{const k=e.target.dataset.w;if(!k)return;e.stopPropagation();
+    if(k==='ok'){src.value=ta.value;src.dispatchEvent(new Event('input',{bubbles:true}))}closeWriter()});
+  lastAct=Date.now()}
+function closeWriter(){$('#writer')?.remove()}
+
+/* ===== TRYB POGLĄDOWY: przykładowe dane, bez hasła ===== */
+function demoSeed(){const S0=DEF();const t=today();S0.settings.lastBackup=new Date().toISOString();
+  const mk=(code,color,group,mode,reason,goals)=>({id:uid(),code,color,status:'aktywny',group,mode,start:addDays(t,-60),end:'',fee:group==='para'?C.cenaPary:C.cenaSesji,tags:'',reason,goals,plan:'Spotkania co tydzień, 50 minut.',important:'',interview:{},diag:[],opinions:[],created:new Date().toISOString()});
+  const P=[mk('P-001','#7A8F73','dorosły',MODES[0],'Obniżony nastrój, napięcie w pracy, trudności ze snem.','- Zwiększenie liczby aktywności dających przyjemność\n- Poprawa jakości snu'),
+    mk('P-002','#D4A88C','para',MODES[0],'Kryzys w związku, częste kłótnie.','- Poprawa komunikacji w związku'),
+    mk('P-003','#9FB0CC','dziecko',MODES[0],'Trudności z uwagą w szkole (wywiad z rodzicem).',''),
+    mk('P-004','#C98A6B','dorosły',MODES[1]||MODES[0],'Zamartwianie, napady lęku.',''),
+    mk('P-005','#B98A86','nastolatek',MODES[0],'Wycofanie, spadek ocen.','')];
+  P[0].diag=[{date:addDays(t,-20),tool:'NEO-PI-R',results:'N: sten 8, E: sten 4, O: sten 6, A: sten 6, C: sten 5',interp:'Podwyższona neurotyczność przy obniżonej ekstrawersji.'}];
+  P[0].opinions=[{id:uid(),date:t,purpose:'Ocena funkcjonowania emocjonalnego',recipient:'Pracodawca',basis:'Na wniosek osoby badanej',dates:'',methods:'Wywiad, NEO-PI-R',observation:'',results:'',conclusions:'',recommendations:'',final:''}];
+  P[0].intake={tpl:'dorosly',date:addDays(t,-60),off:{},extra:'',a:{reason_own:'Od kilku miesięcy nie mam siły, źle śpię.',m_low:true,m_anh:true,m_energy:true,m_conc:true,m_dur:'1–6 miesięcy',a_worry:true,a_tension:true,a_dur:'6 miesięcy – 2 lata',s_insomnia:true,s_3m:true,b_exhaust:true,b_cynic:true,k_passive:true,f_impair:'umiarkowane',
+    phq_0:'2',phq_1:'2',phq_2:'3',phq_3:'2',phq_4:'1',phq_5:'2',phq_6:'2',phq_7:'0',phq_8:'1',gad_0:'2',gad_1:'3',gad_2:'2',gad_3:'2',gad_4:'1',gad_5:'2',gad_6:'1'}};
+  P[0].dx=[{id:uid(),sys:'ICD-10',code:'F32.1',name:KLIN.name10('F32.1'),status:'rozpoznanie robocze',date:t},{id:uid(),sys:'ICD-11',code:'6A70',name:KLIN.name11('6A70'),status:'hipoteza',date:t}];
+  P[2].intake={tpl:'dziecko',date:addDays(t,-14),off:{},extra:'',a:{age:'9',c_inatt:true,c_impuls:true,c_hyper:true,c_two:true,c_anger:true}};
+  S0.patients=P;
+  const sess=(p,dOff,time,type,status,note,paid)=>({id:uid(),patientId:p.id,date:addDays(t,dOff),time,dur:50,type,mode:p.mode,status,fee:p.fee,paid:!!paid,note:note||'',work:'',homework:'',sketch:'',gcalId:null,gcalDirty:false});
+  S0.sessions=[sess(P[0],-7,'09:00','Sesja terapeutyczna','odbyta','Praca z dzienniczkiem nastroju, aktywacja behawioralna.',1),sess(P[0],0,'09:00','Sesja terapeutyczna','zaplanowana'),sess(P[0],7,'09:00','Sesja terapeutyczna','zaplanowana'),
+    sess(P[1],0,'11:00','Sesja terapeutyczna','zaplanowana'),sess(P[1],-7,'11:00','Konsultacja','odbyta','',0),sess(P[2],0,'13:00','Diagnoza','zaplanowana'),
+    sess(P[3],0,'16:00','Konsultacja','zaplanowana'),sess(P[3],-2,'16:00','Konsultacja','odbyta','',1),sess(P[4],1,'15:00','Konsultacja','zaplanowana'),sess(P[4],-1,'15:00','Konsultacja','odw-pacjent'),
+    sess(P[2],2,'13:00','Diagnoza','zaplanowana'),sess(P[0],-14,'09:00','Sesja terapeutyczna','odbyta','Psychoedukacja o depresji.',1)];
+  S0.days[t]={prio:[{t:'Opis sesji P-002',done:false},{t:'Wydrukować zalecenia dla P-004',done:true}],energy:0,reflection:'',gratitude:''};
+  return S0}
+
+/* ---------- licencja ---------- */
+const LIC_SALT='PlanerGabinetu/2026';
+async function licOk(k){k=(k||'').trim().toUpperCase();const m=k.match(/^PG-([A-Z0-9]{5})-([A-Z0-9]{5})-([A-Z0-9]{4})$/);if(!m)return false;
+  const h=new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(LIC_SALT+m[1]+m[2])));
+  const A='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';return m[3]===[0,1,2,3].map(i=>A[h[i]%32]).join('')}
+function licGate(){return new Promise(res=>{const el=$('#lock');
+  $('#app').hidden=true;el.hidden=false;el.innerHTML=`<div class="lockcard"><h1>Planer Gabinetu</h1><p class="sub">Wpisz klucz licencyjny z e-maila po zakupie.</p>
+   <input id="licIn" placeholder="PG-XXXXX-XXXXX-XXXX" autocomplete="off" autocapitalize="characters" style="text-transform:uppercase;text-align:center;font-size:20px">
+   <p id="licErr" class="small" style="color:#b44;min-height:1.2em"></p><button class="btn or" id="licBtn">Aktywuj</button>
+   <p class="small muted" style="margin-top:14px">Klucz sprawdzany jest na tym urządzeniu – nic nie jest wysyłane do internetu.</p></div>`;
+  const go=async()=>{const v=$('#licIn').value.trim().toUpperCase();
+   if(await licOk(v)){try{localStorage.setItem('planer-licencja',v)}catch(_){}el.innerHTML='';res()}else $('#licErr').textContent='Nieprawidłowy klucz. Sprawdź e-mail z zakupem.'};
+  $('#licBtn').onclick=go;$('#licIn').onkeydown=e=>{if(e.key==='Enter')go()}})}
+
+/* ---------- start ---------- */
+(async()=>{
+  if(!window.crypto?.subtle){document.body.innerHTML='<p style="padding:30px">Ta przeglądarka nie obsługuje szyfrowania. Otwórz planer przez https:// w aktualnej przeglądarce.</p>';return}
+  applyTheme();await idb.open();
+  if(DEMO){SALT=crypto.getRandomValues(new Uint8Array(16));K=await deriveKey('podglad-demo',SALT);S=demoSeed();
+    const b=document.createElement('div');b.className='banner';b.style.cssText='position:sticky;top:0;z-index:30;margin:0;border-radius:0;justify-content:center';
+    b.innerHTML='<b>Wersja poglądowa</b> – przykładowe dane. Nie wpisuj tu prawdziwych danych pacjentów.';document.body.prepend(b);
+    save=()=>{};openApp();return}
+  if(!(await licOk(localStorage.getItem('planer-licencja')||''))){await licGate()}
+  await showLock();
+  if('serviceWorker' in navigator&&location.protocol==='https:'){try{navigator.serviceWorker.register('sw.js')}catch(_){}}
+})();
+</script>
+</body>
+</html>
