@@ -1117,7 +1117,7 @@ function licGate(){return new Promise(res=>{const el=$('#lock');
   $('#app').hidden=true;el.hidden=false;el.innerHTML=`<div class="lockcard"><h1>Planer Gabinetu</h1><p class="sub">Wpisz klucz licencyjny z e-maila po zakupie.</p>
    <input id="licIn" placeholder="PG-XXXXX-XXXXX-XXXX" autocomplete="off" autocapitalize="characters" style="text-transform:uppercase;text-align:center;font-size:20px">
    <p id="licErr" class="small" style="color:#b44;min-height:1.2em"></p><button class="btn or" id="licBtn">Aktywuj</button>
-   <p class="small muted" style="margin-top:14px">Klucz sprawdzany jest na tym urządzeniu – nic nie jest wysyłane do internetu.</p></div>`;
+   <p class="small muted" style="margin-top:14px">Klucz sprawdzany jest na tym urządzeniu – nic nie jest wysyłane do internetu.</p><p class="small muted">Dane pacjentów zapisują się wyłącznie na tym urządzeniu. Ich administratorem jesteś Ty – twórczyni planera nie ma do nich dostępu.</p></div>`;
   const go=async()=>{const v=$('#licIn').value.trim().toUpperCase();
    if(await licOk(v)){try{localStorage.setItem('planer-licencja',v)}catch(_){}el.innerHTML='';res()}else $('#licErr').textContent='Nieprawidłowy klucz. Sprawdź e-mail z zakupem.'};
   $('#licBtn').onclick=go;$('#licIn').onkeydown=e=>{if(e.key==='Enter')go()}})}

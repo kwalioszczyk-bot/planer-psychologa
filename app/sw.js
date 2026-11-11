@@ -1,5 +1,5 @@
 // Planer Gabinetu – service worker: działa offline. Buforuje TYLKO pliki aplikacji, nigdy danych pacjentów.
-const CACHE='planer-psychologa-v3';
+const CACHE='planer-psychologa-v4';
 const CORE=['./','./index.html','./kliniczne.js','./planer.config.js','./manifest.webmanifest','./icon.svg','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
